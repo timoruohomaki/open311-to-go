@@ -16,3 +16,5 @@ Most of the Open311 implementations so far are based on Python on Django framewo
 ## Anything new here?
 
 This implementation inludes the additions the City of Helsinki added on Open311, mainly support for other languages and locales and support for external media server in cases where images are included in the ticket.
+
+Source: https://dev.hel.fi/apis/open311 
