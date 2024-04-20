@@ -1,14 +1,17 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"log/slog"
 	"time"
 
 	"github.com/getsentry/sentry-go"
-
 	slogsentry "github.com/samber/slog-sentry/v2"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 // logger based on example by @samber at https://github.com/samber/slog-sentry/blob/main/example/example.go
@@ -39,4 +42,26 @@ func main() {
 		With("environment", "dev").
 		With("error", fmt.Errorf("an error")).
 		Error("an error message")
+
+	// init MongoDB
+
+	client, err := mongo.NewClient(options.Client().ApplyURI(""))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = client.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer client.Disconnect(ctx)
+
+	err = client.Ping(ctx, readpref.Primary())
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
