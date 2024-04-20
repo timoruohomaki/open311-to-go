@@ -1,5 +1,5 @@
-# open311-to-go
-open311 API implementation on Go for my thesis project
+# Open311-to-Go
+
 
 ## What is Open311?
 
@@ -18,3 +18,13 @@ Most of the Open311 implementations so far are based on Python on Django framewo
 This implementation inludes the additions the City of Helsinki added on Open311, mainly support for other languages and locales and support for external media server in cases where images are included in the ticket.
 
 Source: https://dev.hel.fi/apis/open311 
+
+## Development framework and versions
+
+*This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is recommended.
+*The API will be deployed as an Azure Function because it will then be easier to transfer to production platform.
+*Sentry will be used for observations.
+
+## What is the motivation for this?
+
+This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running
