@@ -27,4 +27,4 @@ Source: https://dev.hel.fi/apis/open311
 
 ## What is the motivation for this?
 
-This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running
+This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running by the end of 2024.
