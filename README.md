@@ -19,6 +19,8 @@ This implementation inludes the additions the City of Helsinki added on Open311,
 
 Source: https://dev.hel.fi/apis/open311 
 
+This implementation also uses MongoDB as a backend, also utilizing its spatial functions.
+
 ## Development framework and versions
 
 * This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is recommended.
