@@ -19,6 +19,8 @@ import (
 
 func main() {
 
+	// init logging and Sentry
+
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:           "https://xxx@yyy.ingest.sentry.io/zzzz",
 		EnableTracing: false,
