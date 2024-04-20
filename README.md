@@ -21,9 +21,9 @@ Source: https://dev.hel.fi/apis/open311
 
 ## Development framework and versions
 
-*This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is recommended.
-*The API will be deployed as an Azure Function because it will then be easier to transfer to production platform.
-*Sentry will be used for observations.
+* This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is recommended.
+* The API will be deployed as an Azure Function because it will then be easier to transfer to production platform.
+* Sentry will be used for observations.
 
 ## What is the motivation for this?
 
