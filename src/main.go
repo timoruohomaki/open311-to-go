@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"log/slog"
+	"os"
 	"time"
 
 	"github.com/getsentry/sentry-go"
@@ -21,15 +22,18 @@ func main() {
 
 	// get environmental variables
 
-	mongoURI := os.GetEnv("open311MongoURI")
-	mongoServiceCollection := "open311.services"
-	mongoRequestCollection := "open311.requests"
+	print("Environment:")
+	print("MongoDB Atlas: ", os.Getenv("open311MongoURI"))
+	print("Sentry: ", os.Getenv("open311SentryDSN"))
+
+	// mongoServiceCollection := "open311.services"
+	// mongoRequestCollection := "open311.requests"
 
 	// init logging and Sentry
 	// TODO: refactor as a separate package might be good
 
 	err := sentry.Init(sentry.ClientOptions{
-		Dsn:           "https://xxx@yyy.ingest.sentry.io/zzzz",
+		Dsn:           os.Getenv("open311SentryDSN"),
 		EnableTracing: false,
 	})
 
@@ -54,8 +58,9 @@ func main() {
 		Error("an error message")
 
 	// init MongoDB
+	// TODO: refactor as a separate package might be good
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
+	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("open311MongoURI")))
 
 	if err != nil {
 		log.Fatal(err)
