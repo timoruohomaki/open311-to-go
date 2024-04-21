@@ -8,5 +8,5 @@ Configuration parameters are stored as environmental variables. In Windows they 
 | --- | --- |
 | open311MongoURI | MongoDB Atlas connection string in mongodb+srv version |
 
-[!TIP]
-While it is year 2024, it still miht be required to reboot your Windows 10 after setting environmental variables. 
+>[!TIP]
+>While it is year 2024, it still miht be required to reboot your Windows 10 after setting environmental variables. 
