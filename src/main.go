@@ -19,7 +19,14 @@ import (
 
 func main() {
 
+	// get environmental variables
+
+	mongoURI := os.GetEnv("open311MongoURI")
+	mongoServiceCollection := "open311.services"
+	mongoRequestCollection := "open311.requests"
+
 	// init logging and Sentry
+	// TODO: refactor as a separate package might be good
 
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:           "https://xxx@yyy.ingest.sentry.io/zzzz",
@@ -48,7 +55,7 @@ func main() {
 
 	// init MongoDB
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(""))
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
 
 	if err != nil {
 		log.Fatal(err)
