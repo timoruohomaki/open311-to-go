@@ -6,6 +6,7 @@ import (
 	"log"
 	"log/slog"
 	"os"
+	"os/user"
 	"time"
 
 	"github.com/getsentry/sentry-go"
@@ -20,17 +21,13 @@ import (
 
 func main() {
 
-	// get environmental variables
-
-	print("Environment:")
-	print("MongoDB Atlas: ", os.Getenv("open311MongoURI"))
-	print("Sentry: ", os.Getenv("open311SentryDSN"))
-
 	// mongoServiceCollection := "open311.services"
 	// mongoRequestCollection := "open311.requests"
 
 	// init logging and Sentry
 	// TODO: refactor as a separate package might be good
+
+	currentUser, _ := user.Current()
 
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:           os.Getenv("open311SentryDSN"),
@@ -44,18 +41,20 @@ func main() {
 	defer sentry.Flush(2 * time.Second)
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "v1.0.0")
+	logger = logger.With("release", "v2024.1.0")
 
 	logger.
 		With(
 			slog.Group("user",
-				slog.String("id", "user-123"),
+				slog.String("login", currentUser.Username),
 				slog.Time("created_at", time.Now()),
 			),
 		).
 		With("environment", "dev").
-		With("error", fmt.Errorf("an error")).
-		Error("an error message")
+		With("package", "main").
+		With("logged_user", currentUser.Username).
+		With("error", fmt.Errorf("Sentry extension on slog initialized.")).
+		Error("with an error message")
 
 	// init MongoDB
 	// TODO: refactor as a separate package might be good
