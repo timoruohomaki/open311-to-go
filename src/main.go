@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/timoruohomaki/open311togo/telemetrics"
-	"github.com/timoruohomaki/open311togo/data"
+	"github.com/timoruohomaki/open311togo/storage"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 
 	// initialize MongoDB
 
-	data.MongoInit()
+	storage.MongoGetDatabases()
 
 	
 }

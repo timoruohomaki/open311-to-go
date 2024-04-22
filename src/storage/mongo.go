@@ -1,4 +1,4 @@
-package data
+package storage
 
 import (
 	"context"
@@ -34,6 +34,28 @@ func MongoInit() {
 		log.Fatal(err)
 	}
 
+}
+
+func MongoGetDatabases() {
+	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = client.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer client.Disconnect(ctx)
+
+	err = client.Ping(ctx, readpref.Primary())
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// for testing purposes
 
 	databases, err := client.ListDatabaseNames(ctx, bson.M{})
@@ -41,6 +63,8 @@ func MongoInit() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// todo: return as array
 
 	fmt.Println(databases)
 }

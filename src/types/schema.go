@@ -1,4 +1,4 @@
-package data
+package types
 
 type FeatureOfInterest struct {
 	ID int
