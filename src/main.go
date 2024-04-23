@@ -8,10 +8,9 @@ import (
 
 func main() {
 
-	// initialize logging and connect Sentry telemetry
+	// initialize logging and connect Sentry telemetry with or without performance monitoring
 
 	// telemetrics.InitLog()
-
 	telemetry.InitPerformanceMonitor()
 
 	// initialize MongoDB
