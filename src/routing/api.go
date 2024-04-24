@@ -9,9 +9,12 @@ import (
 
 func Init() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/path/to/{id}", func(w http.ResponseWriter, r *http.Request) {
+	
+	
+
+	mux.HandleFunc("GET /open311/rest/v1/services.json", func(w http.ResponseWriter, r *http.Request) {
 		id := r.PathValue("id")
-		fmt.Fprint(w, "Thank you for calling the path number ",id)
+		fmt.Fprint(w, "These services are available: ",id)
 	})
 
 	telemetry.LogInfo("Starting http server...", "api")

@@ -1,11 +1,15 @@
 package models
 
-import "sync"
+import (
+	"sync"
+
+	"go.mongodb.org/mongo-driver/mongo/description"
+)
 
 type SpatialGeometry struct {
 	id int
 	geometryType string
-	coordinates []double
+	coordinates []float64
 }
 
 type SpatialFeature struct {
@@ -21,19 +25,37 @@ type CustomFeatureProperties struct {
 	id int
 }
 
+type KeyName struct {
+	key 	string
+	name 	string
+}
+
+type ServiceDefinitionAttribute struct {
+	variable	string
+	code 	string
+	datatype 	string
+	required	bool
+	datatype_description	string
+	order	int
+	description	string
+	values	[]KeyName
+}
+
 // as in https://docs.ogc.org/is/18-088/18-088.html#featureofinterest
 
 type FeatureOfInterest struct {
-	id int								`json:"id"`
-	name string							`json:"name"`
-	description string					`json:"description"`
-	featureEncodingType string			`json:"featureEncodinType"`
-	feature SpatialFeature				`json:"feature"`
+	id int			`json:"id"`
+	name string				`json:"name"`
+	description string			`json:"description"`
+	featureEncodingType string		`json:"featureEncodinType"`
+	feature SpatialFeature		`json:"feature"`
 	properties CustomFeatureProperties	`json:"properties"`
 }
 
 type ServiceDefinition struct {
-	id int
+	service_code string
+	ptv_code_URI 	string
+	attribute 	ServiceDefinitionAttribute
 }
 
 type ServiceRequest struct {

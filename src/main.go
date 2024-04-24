@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/timoruohomaki/open311togo/routing"
+//	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/storage"
 	"github.com/timoruohomaki/open311togo/telemetry"
 )
