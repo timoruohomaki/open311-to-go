@@ -19,6 +19,6 @@ func main() {
 
 	// start api service
 
-	api.Init()
+	routing.Init()
 	
 }
