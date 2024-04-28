@@ -7,9 +7,11 @@ import (
 )
 
 type SpatialGeometry struct {
-	id int
-	geometryType string
-	coordinates []float64
+	// json as in GeoJSON (RFC 7946)
+	
+	id int `json:"id"`
+	geometryType string `json:"type"`
+	coordinates []float64 `json:"coordinates"`
 }
 
 type SpatialFeature struct {
