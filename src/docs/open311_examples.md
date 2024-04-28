@@ -79,4 +79,8 @@ Source: https://wiki.open311.org/GeoReport_v2/
 
 ### Service Definition
 
+**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request)
+
 ### Service Request
+
+**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request)
