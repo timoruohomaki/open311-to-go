@@ -1,10 +1,10 @@
-#Open311 Message Examples
+# Open311 Message Examples
 
-QUICK LINKS: [Service List](###Service-List)
+QUICK LINKS: [Service List](###-Service-List)
 
-##Example Responses
+## Example Responses
 
-###Service List
+### Service List
 
 XML -EXAMPLE (e.g. https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov)
 
