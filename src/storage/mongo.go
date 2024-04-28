@@ -72,4 +72,4 @@ func MongoGetDatabases() {
 	fmt.Println(databases)
 }
 
-func InitStorage(db *sql.DB)
+// func InitStorage(db *sql.DB)

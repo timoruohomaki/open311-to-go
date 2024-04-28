@@ -11,6 +11,8 @@ import (
 	slogsentry "github.com/samber/slog-sentry"
 )
 
+var CurrentRelease = "103"
+
 // logger based on example by @samber at https://github.com/samber/slog-sentry/blob/main/example/example.go
 
 func InitLog() {
@@ -29,7 +31,7 @@ func InitLog() {
 	defer sentry.Flush(2 * time.Second)
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "rel103")
+	logger = logger.With("release", CurrentRelease)
 
 	logger.
 		With(
@@ -71,7 +73,7 @@ func InitPerformanceMonitor() {
 	defer sentry.Flush(2 * time.Second)
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "102")
+	logger = logger.With("release", CurrentRelease)
 
 	logger.
 		With(
@@ -92,7 +94,7 @@ func LogError(msg string, pkg string) {
 	currentUser, _ := user.Current()
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "102")
+	logger = logger.With("release", CurrentRelease)
 
 	if logger != nil {
 		logger.
@@ -115,7 +117,7 @@ func LogInfo(msg string, pkg string) {
 	currentUser, _ := user.Current()
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "102")
+	logger = logger.With("release", CurrentRelease)
 
 	if logger != nil {
 		logger.
