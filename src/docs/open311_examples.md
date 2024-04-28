@@ -4,7 +4,7 @@
 
 ### Service List
 
-XML -EXAMPLE
+XML -EXAMPLE (e.g. https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov)
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -39,7 +39,7 @@ XML -EXAMPLE
 </services>
 ```
 
-JSON -EXAMPLE
+JSON -EXAMPLE (e.g. https://api.city.gov/dev/v2/services.json?jurisdiction_id=city.gov)
 
 ```
 [
