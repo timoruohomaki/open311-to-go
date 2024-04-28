@@ -29,7 +29,7 @@ func InitLog() {
 	defer sentry.Flush(2 * time.Second)
 
 	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", "102")
+	logger = logger.With("release", "rel103")
 
 	logger.
 		With(

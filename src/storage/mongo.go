@@ -71,3 +71,5 @@ func MongoGetDatabases() {
 
 	fmt.Println(databases)
 }
+
+func InitStorage(db *sql.DB)
