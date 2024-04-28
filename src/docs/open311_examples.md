@@ -1,6 +1,6 @@
 # Open311 Message Examples
 
-**QUICK LINKS:** [Service List](###-Service-List) [Service Definition](###-Service-Definition) [Service Request](###-Service-Request)
+**QUICK LINKS:** [Service List](#-Service-List) [Service Definition](#-Service-Definition) [Service Request](#-Service-Request)
 
 ## Example Responses
 
