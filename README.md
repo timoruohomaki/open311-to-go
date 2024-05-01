@@ -31,3 +31,7 @@ This implementation also uses MongoDB as a backend, also utilizing its spatial f
 ## What is the motivation for this?
 
 This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running by the end of 2024.
+
+## Credits
+
+This work heavily relies on the concept of distributed services Travis Jeffery provided in his book [Distributed Services with Go](https://a.co/d/g5mhjd8).
