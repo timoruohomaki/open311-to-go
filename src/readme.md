@@ -2,7 +2,7 @@
 
 ## Environmental variables
 
-Configuration parameters are stored as environmental variables. In Windows they can be managed with sysdm.cpl.
+Configuration parameters are stored as environment variables. In Windows they can be managed with sysdm.cpl.
 
 | Key | Value |
 | --- | --- |
