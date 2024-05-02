@@ -110,10 +110,10 @@ Source: https://wiki.open311.org/GeoReport_v2/
             <EventInfo>
             <Position>
                 <PositionDetail>
-                    <PositionKey>Piste</PositionKey>
-                    <PositionValue/>Laakeri 1</PositionValue>
-                    <PositionKey>Suunta</PositionKey>
-                    <PositionValue/>Vaakasuunta</PositionValue>
+                    <PositionKey>Position</PositionKey>
+                    <PositionValue/>Bearing 1</PositionValue>
+                    <PositionKey>Direction</PositionKey>
+                    <PositionValue/>Horizontal</PositionValue>
                 </PositionDetail>
             </Position>
             <Interpretations>
