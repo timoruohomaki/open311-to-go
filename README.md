@@ -21,6 +21,8 @@ Source: https://dev.hel.fi/apis/open311
 
 This implementation also uses MongoDB as a backend, also utilizing its spatial functions.
 
+Due to the experimental nature of this implementation, the schema for service request is extended with inline properties object, containing user-annotated properties as key-value pairs. This approach makes it possible to support use cases where there are additional properties in the service request, e.g. because of supporting a specific standard such as the Finnish PSK 5970 that defines the schema for data record of cases and events.
+
 ## Development framework and versions
 
 * This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is required.
