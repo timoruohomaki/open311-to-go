@@ -90,6 +90,8 @@ Source: https://wiki.open311.org/GeoReport_v2/
 **XML -EXAMPLE (source https://psk-standardisointi.fi/standards/?lang=en)** 
 
 ```
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="case.xsl"?>
 <Case>
     <CaseInfo\>
     <CaseId\>
