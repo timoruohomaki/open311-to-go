@@ -11,6 +11,11 @@ func Init() {
 	mux := http.NewServeMux()
 	
 	// ====== ROUTERS =======
+	
+	// TODO: POST/GET commit log
+
+
+	
 	// GET Service list
 	
 	mux.HandleFunc("GET /open311/rest/v1/services.xml", func(w http.ResponseWriter, r *http.Request) {

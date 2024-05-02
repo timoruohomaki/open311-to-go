@@ -4,6 +4,26 @@ import (
 	"sync"
 )
 
+// commit log structures
+
+type ProduceRequest struct {
+	Record	Record	`json:"record"`
+}
+
+type ProduceResponse struct {
+	Offset	uint64	`json:"offset"`
+}
+
+type ConsumeRequest struct {
+	Offset	uint64	`json:"offset"`
+}
+
+type ConsumeResponse struct {
+	Record	Record	`json"Record"`
+}
+
+// open311 structures
+
 type SpatialGeometry struct {
 	// json as in GeoJSON (RFC 7946)
 
