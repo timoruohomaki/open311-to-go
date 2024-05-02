@@ -79,11 +79,69 @@ Source: https://wiki.open311.org/GeoReport_v2/
 
 ### Service Definition
 
-**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request)
+**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request) [Service Request PSK 5970](#Service-Request-PSK-5970-Schema)
 
 ### Service Request
 
-**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request)
+**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request) [Service Request PSK 5970](#Service-Request-PSK-5970-Schema)
 
 ### Service Request, PSK 5970 Schema
 
+**XML -EXAMPLE (source https://psk-standardisointi.fi/standards/?lang=en)** 
+
+```
+<Case>
+    <CaseInfo\>
+    <CaseId\>
+    <Description>Engine bearing damaged</Description>
+    <PublishedBy>Mark B</PublishedBy>
+    <ObjectInfo>
+        <ObjectDetail>
+            <ObjectKey>Machine ID</ObjectKey>
+            <ObjectValue>172886</ObjectValue>
+        </ObjectDetail>
+        <ObjectDetail>
+            <ObjectKey>Machine type</ObjectKey>
+            <ObjectValue>Motor</ObjectValue>
+        </ObjectDetail>           
+    </ObjectInfo>
+    <Events>
+        <Event>
+            <EventInfo>
+            <Position>
+                <PositionDetail>
+                    <PositionKey>Piste</PositionKey>
+                    <PositionValue/>Laakeri 1</PositionValue>
+                    <PositionKey>Suunta</PositionKey>
+                    <PositionValue/>Vaakasuunta</PositionValue>
+                </PositionDetail>
+            </Position>
+            <Interpretations>
+                <Interpretation>
+                    <InterpretationKey>Diagnosis</InterpretationKey>
+                    <InterpretationValue>Damaged bearing</InterpretationValue>
+                    <InterpretationKey>Severity</InterpretationKey>
+                    <InterpretationValue>Fatal</InterpretationValue>
+                    <InterpretationKey>Lifetime</InterpretationKey>
+                    <InterpretationValue>1y</InterpretationValue>
+                </Interpretation>
+            </Interpretations>
+            <DataRecords>
+                <DataRecord>
+                    <DataRecordDetail>
+                        <DataRecordKey>Spectral Image</DataRecordKey>
+                        <DataRecordValue>image1.tiff</DataRecordValue>
+                    </DataRecordDetail>
+                    <Parameters>
+                        <Parameter unit="kW">
+                            <ParameterKey>power</ParameterKey>
+                            <ParameterValue>220</ParameterValue>
+                        </Parameter>
+                    </Parameters>
+            </DataRecords>
+        </Event>
+    </Events>
+</Case>
+```
+
+**QUICK LINKS:** [Service List](#Service-List) [Service Definition](#Service-Definition) [Service Request](#Service-Request) [Service Request PSK 5970](#Service-Request-PSK-5970-Schema)
