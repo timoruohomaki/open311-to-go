@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="case.xsl"?>
+<CaseList>
+  <HeaderInfo>
+  </HeaderInfo>
+    <Case>
+        <CaseInfo />
+        <CaseId />
+        <Description>Engine bearing damaged</Description>
+        <PublishedBy>Mark B</PublishedBy>
+        <ObjectInfo>
+            <ObjectDetail>
+                <ObjectKey>Machine ID</ObjectKey>
+                <ObjectValue>172886</ObjectValue>
+            </ObjectDetail>
+            <ObjectDetail>
+                <ObjectKey>Machine type</ObjectKey>
+                <ObjectValue>Motor</ObjectValue>
+            </ObjectDetail>
+        </ObjectInfo>
+        <Events>
+            <Event>
+              <EventInfo>
+              </EventInfo>
+              <Position>
+                    <PositionDetail>
+                        <PositionKey>Position</PositionKey>
+                <PositionValue>Bearing 1</PositionValue>
+                <PositionKey>
+                        Direction</PositionKey>
+                <PositionValue>Horizontal</PositionValue>
+                    </PositionDetail>
+                </Position>
+                <Interpretations>
+                    <Interpretation>
+                        <InterpretationKey>Diagnosis</InterpretationKey>
+                        <InterpretationValue>Damaged bearing</InterpretationValue>
+                        <InterpretationKey>Severity</InterpretationKey>
+                        <InterpretationValue>Fatal</InterpretationValue>
+                        <InterpretationKey>Lifetime</InterpretationKey>
+                        <InterpretationValue>1y</InterpretationValue>
+                    </Interpretation>
+                </Interpretations>
+                <DataRecords>
+                    <DataRecord>
+                      <DataRecordDetail>
+                        <DataRecordKey>Spectral Image</DataRecordKey>
+                        <DataRecordValue>image1.tiff</DataRecordValue>
+                      </DataRecordDetail>
+                    </DataRecord>
+                    <Parameters>
+                        <Parameter unit="kW">
+                            <ParameterKey>power</ParameterKey>
+                            <ParameterValue>220</ParameterValue>
+                        </Parameter>
+                    </Parameters>
+                </DataRecords>
+            </Event>
+        </Events>
+    </Case>
+</CaseList>

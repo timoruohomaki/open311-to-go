@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CaseList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HeaderInfo" />
+        <xs:element name="Case">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CaseInfo" />
+              <xs:element name="CaseId" />
+              <xs:element name="Description" type="xs:string" />
+              <xs:element name="PublishedBy" type="xs:string" />
+              <xs:element name="ObjectInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="ObjectDetail">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ObjectKey" type="xs:string" />
+                          <xs:element name="ObjectValue" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Events">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Event">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EventInfo" />
+                          <xs:element name="Position">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="PositionDetail">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:choice maxOccurs="unbounded">
+                                        <xs:element name="PositionKey" type="xs:string" />
+                                        <xs:element name="PositionValue" type="xs:string" />
+                                      </xs:choice>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Interpretations">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Interpretation">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:choice maxOccurs="unbounded">
+                                        <xs:element name="InterpretationKey" type="xs:string" />
+                                        <xs:element name="InterpretationValue" type="xs:string" />
+                                      </xs:choice>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="DataRecords">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="DataRecord">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="DataRecordDetail">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="DataRecordKey" type="xs:string" />
+                                            <xs:element name="DataRecordValue" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Parameters">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Parameter">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ParameterKey" type="xs:string" />
+                                            <xs:element name="ParameterValue" type="xs:unsignedByte" />
+                                          </xs:sequence>
+                                          <xs:attribute name="unit" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
