@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/timoruohomaki/open311togo/routing"
+	"github.com/timoruohomaki/open311togo/server"
 //	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/storage"
 	"github.com/timoruohomaki/open311togo/telemetry"
@@ -18,8 +18,9 @@ func main() {
 
 	storage.MongoGetDatabases()
 
-	// start api service
+	// start api (http) service
 
-	routing.Init()
+	srv := server.Init(":8080")
+	telemetry.LogError(srv.ListenAndServe(), "main")
 	
 }

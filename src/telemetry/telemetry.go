@@ -89,7 +89,13 @@ func InitPerformanceMonitor() {
 
 }
 
-func LogError(msg string, pkg string) {
+func LogError(err error, pkg string) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func LogAsError(msg string, pkg string) {
 
 	currentUser, _ := user.Current()
 

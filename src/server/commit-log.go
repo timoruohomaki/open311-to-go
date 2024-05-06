@@ -1,4 +1,4 @@
-package routing
+package server
 
 // credits: This very much relies on to the commit log example by Travis Jeffery
 
