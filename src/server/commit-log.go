@@ -5,18 +5,19 @@ package server
 import (
 	"fmt"
 	"sync"
+	"github.com/timoruohomaki/open311togo/models"
 )
 
 type Log struct {
 	mu 		sync.Mutex
-	records	[]Record
+	records	[]models.Record
 }
 
 func NewLog() *Log {
 	return &Log{}
 }
 
-func (c *Log) Append(record Record) (uint64, error) {
+func (c *Log) Append(record models.Record) (uint64, error) {
 	c.mu.Lock()
 	defer c.mu.Lock()
 	record.Offset = uint64(len(c.records))
@@ -24,18 +25,15 @@ func (c *Log) Append(record Record) (uint64, error) {
 	return record.Offset, nil
 }
 
-func (c *Log) Read(offset uint64) (Record, error) {
+func (c *Log) Read(offset uint64) (models.Record, error) {
 	c.mu.Lock()
 	defer c.mu.Lock()
 	if offset >= uint64(len(c.records)) {
-		return Record{}, ErrOffsetNotFound
+		return models.Record{}, ErrOffsetNotFound
 	}
 	return c.records[offset], nil
 }
 
-type Record struct {
-	Value 	[]byte	`json:"value`
-	Offset	uint64	`json:offset`
-}
+
 
 var ErrOffsetNotFound = fmt.Errorf("Offset not found")

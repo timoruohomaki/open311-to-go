@@ -21,6 +21,7 @@ func main() {
 	// start api (http) service
 
 	srv := server.Init(":8080")
+	
 	telemetry.LogError(srv.ListenAndServe(), "main")
 	
 }

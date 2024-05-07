@@ -1,28 +1,63 @@
 package models
 
 import (
+//	"encoding/json"
+//	"net/http"
 	"sync"
 )
 
 // commit log structures
 
+type Record struct {
+	Value 	[]byte	`json:"value`
+	Offset	uint64	`json:"offset"`
+}
+
 type ProduceRequest struct {
-	Record	Record	`json:"record"`
+	Record Record `json:"record"`
 }
 
 type ProduceResponse struct {
-	Offset	uint64	`json:"offset"`
+	Offset uint64 `json:"offset"`
 }
 
 type ConsumeRequest struct {
-	Offset	uint64	`json:"offset"`
+	Offset uint64 `json:"offset"`
 }
 
 type ConsumeResponse struct {
-	Record	Record	`json"Record"`
+	Record Record `json:"record"`
 }
 
-// open311 structures
+// open311 request structures (all request and response structures have xml and json versions)
+
+type RecordJson struct {
+	Value 	[]byte	`json:"value`
+	Offset	uint64	`json:"offset"`
+}
+
+type RecordXml struct {
+	Value 	[]byte	`xml:"value`
+	Offset	uint64	`xml:"offset"`
+}
+
+type ConsumeServicesXmlRequest struct {
+	Offset uint64 `xml:"offset"`
+}
+
+type ConsumeServicesXmlResponse struct {
+	Record RecordXml `xml:"record"`
+}
+
+type ConsumeServicesJsonRequest struct {
+	Offset uint64 `json:"offset"`
+}
+
+type ConsumeServicesJsonResponse struct {
+	Record RecordJson `json:"record"`
+}
+
+// open311 data structures
 
 type SpatialGeometry struct {
 	// json as in GeoJSON (RFC 7946)

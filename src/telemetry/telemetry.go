@@ -90,7 +90,26 @@ func InitPerformanceMonitor() {
 }
 
 func LogError(err error, pkg string) {
+	currentUser, _ := user.Current()
+
+	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
+	logger = logger.With("release", CurrentRelease)
+
 	if err != nil {
+		if logger != nil {
+			logger.
+			With(
+				slog.Group("user",
+					slog.String("id", currentUser.Uid),
+					slog.String("login", currentUser.Username),
+					slog.Time("created_at", time.Now()),					
+				),
+			).
+			With("environment","dev").
+			With("package", pkg).
+			Error(err.Error())
+
+		}
 		log.Fatal(err)
 	}
 }
