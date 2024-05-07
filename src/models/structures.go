@@ -9,7 +9,7 @@ import (
 // commit log structures
 
 type Record struct {
-	Value 	[]byte	`json:"value`
+	Value 	[]byte	`json:"value"`
 	Offset	uint64	`json:"offset"`
 }
 
@@ -32,12 +32,12 @@ type ConsumeResponse struct {
 // open311 request structures (all request and response structures have xml and json versions)
 
 type RecordJson struct {
-	Value 	[]byte	`json:"value`
+	Value 	[]byte	`json:"value"`
 	Offset	uint64	`json:"offset"`
 }
 
 type RecordXml struct {
-	Value 	[]byte	`xml:"value`
+	Value 	[]byte	`xml:"value"`
 	Offset	uint64	`xml:"offset"`
 }
 
