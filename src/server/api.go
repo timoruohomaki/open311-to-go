@@ -133,7 +133,7 @@ func (s *httpServer) handleGetServicesXml(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	res := models.ConsumeServicesXmlResponse{RecordXml: record}
+	res := models.ConsumeServicesXmlResponse{models.RecordXml: record}
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {
@@ -165,7 +165,7 @@ func (s *httpServer) handleGetServicesJson(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	res := models.ConsumeServicesJsonResponse{RecordJson: record}
+	res := models.ConsumeServicesJsonResponse{models.RecordJson: record}
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {

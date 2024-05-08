@@ -34,6 +34,4 @@ func (c *Log) Read(offset uint64) (models.Record, error) {
 	return c.records[offset], nil
 }
 
-
-
 var ErrOffsetNotFound = fmt.Errorf("Offset not found")
