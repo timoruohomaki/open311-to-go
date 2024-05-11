@@ -82,6 +82,7 @@ func (s *httpServer) handleConsume(w http.ResponseWriter, r *http.Request) {
 	var req models.ConsumeRequest
 
 	err := json.NewDecoder(r.Body).Decode(&req)
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -100,6 +101,7 @@ func (s *httpServer) handleConsume(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := models.ConsumeResponse{Record: record}
+	
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {
@@ -109,7 +111,7 @@ func (s *httpServer) handleConsume(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// open311 request handlers
+// open311 request handlers: XML
 
 func (s *httpServer) handleGetServicesXml(w http.ResponseWriter, r *http.Request) {
 
@@ -133,7 +135,8 @@ func (s *httpServer) handleGetServicesXml(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	res := models.ConsumeServicesXmlResponse{models.RecordXml: record}
+	res := models.ConsumeServicesXmlResponse{Record: record}
+
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {
@@ -142,6 +145,8 @@ func (s *httpServer) handleGetServicesXml(w http.ResponseWriter, r *http.Request
 	}
 
 }
+
+// open311 request handlers: JSON
 
 func (s *httpServer) handleGetServicesJson(w http.ResponseWriter, r *http.Request) {
 
@@ -165,7 +170,7 @@ func (s *httpServer) handleGetServicesJson(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	res := models.ConsumeServicesJsonResponse{models.RecordJson: record}
+	res := models.ConsumeServicesJsonResponse{Record: record}
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {

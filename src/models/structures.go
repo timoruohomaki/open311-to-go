@@ -46,7 +46,7 @@ type ConsumeServicesXmlRequest struct {
 }
 
 type ConsumeServicesXmlResponse struct {
-	Record RecordXml `xml:"record"`
+	Record Record `xml:"record"`
 }
 
 type ConsumeServicesJsonRequest struct {
@@ -54,7 +54,7 @@ type ConsumeServicesJsonRequest struct {
 }
 
 type ConsumeServicesJsonResponse struct {
-	Record RecordJson `json:"record"`
+	Record Record `json:"record"`
 }
 
 // open311 data structures
