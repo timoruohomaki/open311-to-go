@@ -34,8 +34,10 @@ func Init(address string) *http.Server {
 	telemetry.LogInfo("Starting http server...", "api")
 
 	return &http.Server{
-		Addr:	address,
-		Handler:	mux,
+		Addr:			address,
+		ReadTimeOut:	time.Second * 5,
+		WriteTimeout: 	time.Second * 5,
+		Handler:		mux,
 	}
 }
 
