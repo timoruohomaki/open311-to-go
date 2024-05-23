@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"time"
 	"net/http"
 	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/telemetry"
@@ -35,7 +36,7 @@ func Init(address string) *http.Server {
 
 	return &http.Server{
 		Addr:			address,
-		ReadTimeOut:	time.Second * 5,
+		ReadTimeout:	time.Second * 5,
 		WriteTimeout: 	time.Second * 5,
 		Handler:		mux,
 	}
