@@ -65,8 +65,6 @@ func MongoGetDatabases() {
 		log.Fatal(err)
 	}
 
-	// todo: return as array
-
 	telemetry.LogInfo("MongoDB connected, available databases: " + strings.Join(databases," "), "storage")
 
 	fmt.Println(databases)
