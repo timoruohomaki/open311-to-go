@@ -3,11 +3,11 @@ package storage
 import (
 	"context"
 	"fmt"
-	"strings"
-
+	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/telemetry"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"strings"
 	//"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
@@ -35,7 +35,7 @@ func MongoGetDatabases(c mongo.Client) {
 	// fmt.Println(databases)
 }
 
-func MongoGetCollection(c *mongo.Client) {
+func MongoGetCollection(c mongo.Client) {
 
 	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
 		telemetry.LogError(err, "storage")
@@ -64,4 +64,21 @@ func MongoGetCollection(c *mongo.Client) {
 		fmt.Println(result)
 	}
 
+}
+
+func MongoInsertServiceRequest(c mongo.Client, req models.Open311ServiceRequest) {
+
+	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
+		telemetry.LogError(err, "storage")
+		panic(err)
+	}
+
+	requestCollection := c.Database("open311").Collection("requests")
+
+	_, err = requestCollection.InsertOne(context.TODO(), &req)
+
+	if err != nil {
+		telemetry.LogError(err, "storage")
+		log.Fatalln("Error inserting document", err)
+	}
 }

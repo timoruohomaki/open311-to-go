@@ -27,7 +27,7 @@ func main() {
 		panic(err)
 	}
 
-	storage.MongoGetCollection(*client)
+	storage.MongoGetCollection(client)
 
 	// start api (http) service
 

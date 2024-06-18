@@ -1,16 +1,16 @@
 package models
 
 import (
-//	"encoding/json"
-//	"net/http"
+	//	"encoding/json"
+	//	"net/http"
 	"sync"
 )
 
 // commit log structures
 
 type Record struct {
-	Value 	[]byte	`json:"value"`
-	Offset	uint64	`json:"offset"`
+	Value  []byte `json:"value"`
+	Offset uint64 `json:"offset"`
 }
 
 type ProduceRequest struct {
@@ -32,13 +32,13 @@ type ConsumeResponse struct {
 // open311 request structures (all request and response structures have xml and json versions)
 
 type RecordJson struct {
-	Value 	[]byte	`json:"value"`
-	Offset	uint64	`json:"offset"`
+	Value  []byte `json:"value"`
+	Offset uint64 `json:"offset"`
 }
 
 type RecordXml struct {
-	Value 	[]byte	`xml:"value"`
-	Offset	uint64	`xml:"offset"`
+	Value  []byte `xml:"value"`
+	Offset uint64 `xml:"offset"`
 }
 
 type ConsumeServicesXmlRequest struct {
@@ -112,8 +112,9 @@ type ServiceDefinition struct {
 	attribute    ServiceDefinitionAttribute
 }
 
-type ServiceRequest struct {
-	id int
+type Open311ServiceRequest struct {
+	id    int
+	title string
 }
 
 type Defaults struct {
@@ -131,5 +132,5 @@ type ServiceStore struct {
 type RequestStore struct {
 	sync.Mutex
 
-	requests map[int]ServiceRequest
+	requests map[int]Open311ServiceRequest
 }
