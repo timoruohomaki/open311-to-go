@@ -5,7 +5,7 @@ go 1.22.2
 require (
 	github.com/getsentry/sentry-go v0.27.0
 	github.com/samber/slog-sentry v1.2.2
-	go.mongodb.org/mongo-driver v1.15.0
+	go.mongodb.org/mongo-driver v1.15.1
 )
 
 require (

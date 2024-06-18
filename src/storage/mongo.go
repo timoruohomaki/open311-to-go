@@ -3,69 +3,65 @@ package storage
 import (
 	"context"
 	"fmt"
-	"log"
-	"os"
-	"time"
 	"strings"
 
 	"github.com/timoruohomaki/open311togo/telemetry"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	//"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func MongoInit() {
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+func MongoGetDatabases(c mongo.Client) {
 
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
+	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
+		telemetry.LogError(err, "storage")
+		panic(err)
 	}
 
-	defer client.Disconnect(ctx)
-
-	err = client.Ping(ctx, readpref.Primary())
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-}
-
-func MongoGetDatabases() {
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("open311MongoURI")))
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer client.Disconnect(ctx)
-
-	err = client.Ping(ctx, readpref.Primary())
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	fmt.Println("MongoDB responded to ping.")
 
 	// for testing purposes
 
-	databases, err := client.ListDatabaseNames(ctx, bson.M{})
+	databases, err := c.ListDatabaseNames(context.TODO(), bson.M{})
 
 	if err != nil {
-		log.Fatal(err)
+		telemetry.LogError(err, "storage")
+		panic(err)
 	}
 
-	telemetry.LogInfo("MongoDB connected, available databases: " + strings.Join(databases," "), "storage")
+	telemetry.LogInfo("MongoDB connected, available databases: "+strings.Join(databases, " "), "storage")
 
-	fmt.Println(databases)
+	// fmt.Println(databases)
+}
+
+func MongoGetCollection(c *mongo.Client) {
+
+	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
+		telemetry.LogError(err, "storage")
+		panic(err)
+	}
+
+	requestCollection := c.Database("open311").Collection("requests")
+
+	cursor, err := requestCollection.Find(context.TODO(), bson.D{})
+
+	if err != nil {
+		telemetry.LogError(err, "storage")
+		panic(err)
+	}
+
+	var results []bson.M
+
+	if err = cursor.All(context.TODO(), &results); err != nil {
+		telemetry.LogError(err, "storage")
+		panic(err)
+	}
+
+	fmt.Println("Displaying all received requests:")
+
+	for _, result := range results {
+		fmt.Println(result)
+	}
+
 }
