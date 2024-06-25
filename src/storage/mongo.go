@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func MongoGetDatabases(c mongo.Client) {
+/* func MongoGetDatabases(c mongo.Client) {
 
 	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
 		telemetry.LogError(err, "storage")
@@ -81,4 +81,4 @@ func MongoInsertServiceRequest(c mongo.Client, req models.Open311ServiceRequest)
 		telemetry.LogError(err, "storage")
 		log.Fatalln("Error inserting document", err)
 	}
-}
+} */

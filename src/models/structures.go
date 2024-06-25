@@ -3,58 +3,43 @@ package models
 import (
 	//	"encoding/json"
 	//	"net/http"
+	"encoding/json"
 	"sync"
+	"time"
 )
 
-// commit log structures
+// helper functions
+
+func GetServerTime() (result string) {
+
+	currentTime := time.Now()
+	formattedTime := currentTime.Format(time.RFC3339)
+	tzinfo := currentTime.Location().String()
+
+	t := &ServerTime{
+		SqlDateTime: formattedTime,
+		TimeZone:    tzinfo,
+		IsDST:       true,
+		Info:        "",
+	}
+
+	s, _ := json.Marshal(t)
+
+	result = string(s)
+	return result
+
+}
+
+// log and telemetry
+
+type TeleLog struct {
+	mu      sync.Mutex
+	records []Record
+}
 
 type Record struct {
 	Value  []byte `json:"value"`
 	Offset uint64 `json:"offset"`
-}
-
-type ProduceRequest struct {
-	Record Record `json:"record"`
-}
-
-type ProduceResponse struct {
-	Offset uint64 `json:"offset"`
-}
-
-type ConsumeRequest struct {
-	Offset uint64 `json:"offset"`
-}
-
-type ConsumeResponse struct {
-	Record Record `json:"record"`
-}
-
-// open311 request structures (all request and response structures have xml and json versions)
-
-type RecordJson struct {
-	Value  []byte `json:"value"`
-	Offset uint64 `json:"offset"`
-}
-
-type RecordXml struct {
-	Value  []byte `xml:"value"`
-	Offset uint64 `xml:"offset"`
-}
-
-type ConsumeServicesXmlRequest struct {
-	Offset uint64 `xml:"offset"`
-}
-
-type ConsumeServicesXmlResponse struct {
-	Record Record `xml:"record"`
-}
-
-type ConsumeServicesJsonRequest struct {
-	Offset uint64 `json:"offset"`
-}
-
-type ConsumeServicesJsonResponse struct {
-	Record Record `json:"record"`
 }
 
 // open311 data structures
@@ -68,11 +53,11 @@ type SpatialGeometry struct {
 }
 
 type SpatialFeature struct {
-	id                   int
-	authorityName        string
-	authorityResourceURI string
-	featureType          string
-	featureGeometry      SpatialGeometry
+	id                   int             `json:"id"`
+	authorityName        string          `json:"authorityName"`
+	authorityResourceURI string          `json:"authorityResourceURI"`
+	featureType          string          `json:"featureType"`
+	featureGeometry      SpatialGeometry `json:"featureGeometry"`
 }
 
 type CustomFeatureProperties struct {
@@ -112,9 +97,22 @@ type ServiceDefinition struct {
 	attribute    ServiceDefinitionAttribute
 }
 
+type ServerTime struct {
+	SqlDateTime string `json: "SQLDateTime"`
+	TimeZone    string `json: "TimeZone"`
+	IsDST       bool   `json: "DST"`
+	Info        string `json: "Info"`
+}
+
 type Open311ServiceRequest struct {
-	id    int
-	title string
+	jurisdiction_id int `json:"jurisdiction_id"`
+	service_code    int `json:"service_code"`
+}
+
+type Open311ServiceRequestResponse struct {
+	service_request_id int
+	service_notice     int
+	account_id         string
 }
 
 type Defaults struct {
