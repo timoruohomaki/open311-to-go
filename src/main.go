@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"github.com/timoruohomaki/open311togo/models"
+	// "fmt"
+	// "github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
 	// "github.com/timoruohomaki/open311togo/storage"
 	"github.com/timoruohomaki/open311togo/telemetry"

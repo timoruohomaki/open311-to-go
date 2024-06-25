@@ -25,7 +25,7 @@ func Init(address string) *http.Server {
 
 	telemetry.LogInfo("Starting http server...", "api")
 
-	fmt.Println("Starting http server...")
+	fmt.Println("Starting Open311 service on port" + address + "...")
 
 	return &http.Server{
 		Addr:         address,
