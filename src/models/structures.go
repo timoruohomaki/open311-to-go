@@ -6,7 +6,10 @@ import (
 	"encoding/json"
 	"sync"
 	"time"
+	// "golang.org/x/text/internal/language"
 )
+
+// NOTE: Open311 structures follow GeoReport v2 whenever possible https://wiki.open311.org/GeoReport_v2/
 
 // helper functions
 
@@ -42,67 +45,15 @@ type Record struct {
 	Offset uint64 `json:"offset"`
 }
 
-// open311 data structures
-
-type SpatialGeometry struct {
-	// json as in GeoJSON (RFC 7946)
-
-	id           int       `json:"id"`
-	geometryType string    `json:"type"`
-	coordinates  []float64 `json:"coordinates"`
-}
-
-type SpatialFeature struct {
-	id                   int             `json:"id"`
-	authorityName        string          `json:"authorityName"`
-	authorityResourceURI string          `json:"authorityResourceURI"`
-	featureType          string          `json:"featureType"`
-	featureGeometry      SpatialGeometry `json:"featureGeometry"`
-}
-
-type CustomFeatureProperties struct {
-	id int
-}
-
-type KeyName struct {
-	key  string
-	name string
-}
-
-type ServiceDefinitionAttribute struct {
-	variable             string
-	code                 string
-	datatype             string
-	required             bool
-	datatype_description string
-	order                int
-	description          string
-	values               []KeyName
-}
-
-// as in https://docs.ogc.org/is/18-088/18-088.html#featureofinterest
-
-type FeatureOfInterest struct {
-	id                  int                     `json:"id"`
-	name                string                  `json:"name"`
-	description         string                  `json:"description"`
-	featureEncodingType string                  `json:"featureEncodinType"`
-	feature             SpatialFeature          `json:"feature"`
-	properties          CustomFeatureProperties `json:"properties"`
-}
-
-type ServiceDefinition struct {
-	service_code string
-	ptv_code_URI string
-	attribute    ServiceDefinitionAttribute
-}
-
 type ServerTime struct {
-	SqlDateTime string `json: "SQLDateTime"`
-	TimeZone    string `json: "TimeZone"`
-	IsDST       bool   `json: "DST"`
-	Info        string `json: "Info"`
+	SqlDateTime string `json:"SQLDateTime"`
+	TimeZone    string `json:"TimeZone"`
+	IsDST       bool   `json:"DST"`
+	Info        string `json:"Info"`
 }
+
+// open311 data structures
+// resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
 type Open311ServiceRequest struct {
 	jurisdiction_id int `json:"jurisdiction_id"`
@@ -110,11 +61,78 @@ type Open311ServiceRequest struct {
 }
 
 type Open311ServiceRequestResponse struct {
-	service_request_id int
-	service_notice     int
-	account_id         string
+	Service_request_id int    `json:"serviceRequestId"`
+	Service_notice     int    `json:"serviceNotice"`
+	Account_id         string `json:"accountId"`
 }
 
+type CesSchema struct {
+	Question_id   int    `json:"question_id"`
+	Rating_id     int    `json:"rating_id"`
+	CesQuestion   string `json:"cesQuestion"`
+	CesQuestionId int    `json:"cesQuestionId"`
+	CesRating     string `json:"cesRating"`
+	CesComment    string `json:"cesComment"`
+	Language      string `json:"language"` // ISO 639
+
+}
+
+// geospatial structures
+
+type SpatialGeometry struct {
+	// json as in GeoJSON (RFC 7946)
+
+	Id           int       `json:"id"`
+	GeometryType string    `json:"type"`
+	Coordinates  []float64 `json:"coordinates"`
+}
+
+type SpatialFeature struct {
+	Id                   int             `json:"id"`
+	AuthorityName        string          `json:"authorityName"`
+	AuthorityResourceURI string          `json:"authorityResourceURI"`
+	FeatureType          string          `json:"featureType"`
+	FeatureGeometry      SpatialGeometry `json:"featureGeometry"`
+}
+
+type CustomFeatureProperties struct {
+	Id int `json:"id"`
+}
+
+type KeyName struct {
+	Key  string `json:"key"`
+	Name string `json:"name"`
+}
+
+type ServiceDefinitionAttribute struct {
+	Variable             string    `json:"variable"`
+	Code                 string    `json:"code"`
+	Datatype             string    `json:"datatype"`
+	Required             bool      `json:"required"`
+	Datatype_description string    `json:"datatypeDescription"`
+	Order                int       `json:"order"`
+	Description          string    `json:"description"`
+	Values               []KeyName `json:"values"`
+}
+
+// as in https://docs.ogc.org/is/18-088/18-088.html#featureofinterest
+
+type FeatureOfInterest struct {
+	Id                  int                     `json:"id"`
+	Name                string                  `json:"name"`
+	Description         string                  `json:"description"`
+	FeatureEncodingType string                  `json:"featureEncodinType"`
+	Feature             SpatialFeature          `json:"feature"`
+	Properties          CustomFeatureProperties `json:"properties"`
+}
+
+type ServiceDefinition struct {
+	Service_code string                     `json:"serviceCode"`
+	PTV_code_URI string                     `json:"ptvCodeURI"`
+	Attribute    ServiceDefinitionAttribute `json:"attributeList"`
+}
+
+/*
 type Defaults struct {
 	mongoServiceCollection string
 	mongoRequestCollection string
@@ -131,4 +149,4 @@ type RequestStore struct {
 	sync.Mutex
 
 	requests map[int]Open311ServiceRequest
-}
+} */
