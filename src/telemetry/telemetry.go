@@ -8,7 +8,6 @@ import (
 )
 
 var Logger *zap.SugaredLogger
-var AccessLogger *zap.SugaredLogger
 
 func InitLog(level string) {
 
@@ -52,28 +51,3 @@ func InitLog(level string) {
 	Logger = logger.Sugar()
 
 }
-
-func InitAccessLog() {
-
-	// this gets called from router.go
-
-	encoder := zap.NewProductionEncoderConfig()
-	encoder.TimeKey = "timestamp"
-	encoder.EncodeTime = zapcore.ISO8601TimeEncoder
-
-	zapConfig := zap.NewProductionConfig()
-	zapConfig.EncoderConfig = encoder
-	zapConfig.Level = zap.NewAtomicLevel()
-
-	logger, err := zapConfig.Build()
-
-	if err != nil {
-		panic(err)
-	}
-
-	AccessLogger = logger.Sugar()
-
-}
-
-// TODO: Apache Common Log Format:
-// 127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326
