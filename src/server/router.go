@@ -18,13 +18,13 @@ func Init(address string) *http.Server {
 
 	mux.HandleFunc("GET /open311/rest/v1/time", HandleGetTime)
 
-	// GET Service list, jurusdiction required
+	// GET Service list, jurisdiction required
 	// example: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
 	mux.HandleFunc("/open311/rest/v1/services.xml", HandleGetServicesXML)
 	mux.HandleFunc("/open311/rest/v1/services.json", HandleGetServicesJSON)
 
-	telemetry.LogInfo("Starting http server...", "api")
+	telemetry.Logger.Info("Starting http server...", "api")
 
 	fmt.Println("Starting Open311 service on port" + address + "...")
 

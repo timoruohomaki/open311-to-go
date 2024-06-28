@@ -1,161 +1,49 @@
 package telemetry
 
 import (
-	"log"
-	"log/slog"
-	"os"
-	"os/user"
-	"time"
-
-	"github.com/getsentry/sentry-go"
-	slogsentry "github.com/samber/slog-sentry"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	// lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
-var CurrentRelease = "103"
+var Logger *zap.SugaredLogger
 
-// logger based on example by @samber at https://github.com/samber/slog-sentry/blob/main/example/example.go
+func InitLog(level string) {
 
-func InitLog() {
+	var err error
+	var logLevel zapcore.Level
 
-	currentUser, _ := user.Current()
+	switch level {
+	case "DEBUG":
+		logLevel = zap.DebugLevel
+	case "INFO":
+		logLevel = zap.InfoLevel
+	case "WARNING":
+		logLevel = zap.WarnLevel
+	case "ERROR":
+		logLevel = zap.ErrorLevel
+	default:
+		logLevel = zap.InfoLevel // fallback
+	}
 
-	err := sentry.Init(sentry.ClientOptions{
-		Dsn:           os.Getenv("open311SentryDSN"),
-		EnableTracing: false,
-	})
+	zapLevel := zap.NewAtomicLevelAt(logLevel)
+	encoder := zap.NewProductionEncoderConfig()
+
+	zapConfig := zap.NewProductionConfig()
+	zapConfig.EncoderConfig = encoder
+	zapConfig.Level = zapLevel
+	zapConfig.Development = false
+	zapConfig.Encoding = "json"
+	zapConfig.InitialFields = map[string]interface{}{"version": "104"}
+	zapConfig.OutputPaths = []string{"stdout", "c:\\Open311Logs\\open311.log"}
+	zapConfig.ErrorOutputPaths = []string{"stdout", "c:\\Open311Logs\\open311_ERROR.log"}
+
+	logger, err := zapConfig.Build()
 
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
-	defer sentry.Flush(2 * time.Second)
-
-	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", CurrentRelease)
-
-	logger.
-		With(
-			slog.Group("user",
-				slog.String("id", currentUser.Uid),
-				slog.String("login", currentUser.Username),
-				slog.Time("created_at", time.Now()),
-			),
-		).
-		With("environment", "dev").
-		With("package", "telemetrics").
-		// With("logged_user", currentUser.Username).
-		// With("error", fmt.Errorf("Sentry extension initialized.")).
-		Info("Sentry extension initialized.")
-
-}
-
-func InitPerformanceMonitor() {
-
-	currentUser, _ := user.Current()
-
-	err := sentry.Init(sentry.ClientOptions{
-		Dsn:           os.Getenv("open311SentryDSN"),
-		EnableTracing: true,
-		TracesSampleRate: 1.0,
-		TracesSampler: sentry.TracesSampler(func(ctx sentry.SamplingContext) float64 {
-			if ctx.Span.Name == "GET /path" {
-				return 0.0
-			}
-
-			return 1.0
-		}),
-	})
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer sentry.Flush(2 * time.Second)
-
-	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", CurrentRelease)
-
-	logger.
-		With(
-			slog.Group("user",
-				slog.String("id", currentUser.Uid),
-				slog.String("login", currentUser.Username),
-				slog.Time("created_at", time.Now()),
-			),
-		).
-		With("environment", "dev").
-		With("package", "telemetrics").
-		Info("Sentry performance monitor initialized.")
-
-}
-
-func LogError(err error, pkg string) {
-	currentUser, _ := user.Current()
-
-	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", CurrentRelease)
-
-	if err != nil {
-		if logger != nil {
-			logger.
-			With(
-				slog.Group("user",
-					slog.String("id", currentUser.Uid),
-					slog.String("login", currentUser.Username),
-					slog.Time("created_at", time.Now()),					
-				),
-			).
-			With("environment","dev").
-			With("package", pkg).
-			Error(err.Error())
-
-		}
-		log.Fatal(err)
-	}
-}
-
-func LogAsError(msg string, pkg string) {
-
-	currentUser, _ := user.Current()
-
-	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", CurrentRelease)
-
-	if logger != nil {
-		logger.
-		With(
-			slog.Group("user",
-				slog.String("id", currentUser.Uid),
-				slog.String("login", currentUser.Username),
-				slog.Time("created_at", time.Now()),
-			),
-		).
-		With("environment", "dev").
-		With("package", pkg).
-		Error(msg)
-	}
-
-}
-
-func LogInfo(msg string, pkg string) {
-
-	currentUser, _ := user.Current()
-
-	logger := slog.New(slogsentry.Option{Level: slog.LevelDebug}.NewSentryHandler())
-	logger = logger.With("release", CurrentRelease)
-
-	if logger != nil {
-		logger.
-		With(
-			slog.Group("user",
-				slog.String("id", currentUser.Uid),
-				slog.String("login", currentUser.Username),
-				slog.Time("created_at", time.Now()),
-			),
-		).
-		With("environment", "dev").
-		With("package", pkg).
-		Info(msg)
-	}
+	Logger = logger.Sugar()
 
 }
