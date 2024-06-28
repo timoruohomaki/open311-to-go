@@ -11,7 +11,7 @@ Configuration parameters are stored as environment variables. In Windows they ca
 | open311port | Port of the listener, e.g. 8080 |
 | open311_SSH_CERT | Path to SSH cert |
 | open311_SSH_KEY | Path to SSH public key |
-| open311_LOCALLOG | If 1, write local log file on open311_LOGPATH |
+| open311_LOGLOCAL | If 1, write local log file on open311_LOGPATH (e.g. /var/log/open311) |
 | open311_LOGPATH | Path including filename to local log |
 
 
