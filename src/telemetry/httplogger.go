@@ -103,16 +103,3 @@ func HTTPLogger(handler http.Handler) http.Handler {
 
 	})
 }
-
-/*
-fmt.Printf("HTTP - %s - - %s \"%s %s %s\" %d %d %s %dus\n",
-r.RemoteAddr,
-t.Format("02/Jan/2006:15:04:05 -0700"),
-r.Method,
-r.URL.Path,
-r.Proto,
-interceptWriter.HTTPStatus,
-interceptWriter.ResponseSize,
-r.UserAgent(),
-time.Since(t),
-) */
