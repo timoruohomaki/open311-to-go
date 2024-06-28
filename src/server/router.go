@@ -24,7 +24,7 @@ func Init(address string) *http.Server {
 	mux.HandleFunc("/open311/rest/v1/services.xml", HandleGetServicesXML)
 	mux.HandleFunc("/open311/rest/v1/services.json", HandleGetServicesJSON)
 
-	telemetry.Logger.Info("Starting http server...", "api")
+	telemetry.Logger.Info("Starting Open311 Listener, port" + address)
 
 	fmt.Println("Starting Open311 service on port" + address + "...")
 
@@ -35,6 +35,7 @@ func Init(address string) *http.Server {
 		IdleTimeout:       time.Second * 120,
 		ReadHeaderTimeout: time.Second * 5,
 		MaxHeaderBytes:    1 << 20,
-		Handler:           mux,
+		Handler:           telemetry.HTTPLogger(mux),
+		//	Handler:           mux,
 	}
 }
