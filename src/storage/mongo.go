@@ -3,82 +3,67 @@ package storage
 import (
 	"context"
 	"fmt"
+	"strings"
+	"time"
+
 	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/telemetry"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"strings"
+
 	//"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-/* func MongoGetDatabases(c mongo.Client) {
+// database interface
 
-	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	fmt.Println("MongoDB responded to ping.")
-
-	// for testing purposes
-
-	databases, err := c.ListDatabaseNames(context.TODO(), bson.M{})
-
-	if err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	telemetry.LogInfo("MongoDB connected, available databases: "+strings.Join(databases, " "), "storage")
-
-	// fmt.Println(databases)
+type DBInterface interface {
+	GetServiceCollection() *mongo.Collection
 }
 
-func MongoGetCollection(c mongo.Client) {
+type MDB struct {
+	Dbcli *mongo.Client
+}
 
-	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	requestCollection := c.Database("open311").Collection("requests")
-
-	cursor, err := requestCollection.Find(context.TODO(), bson.D{})
-
-	if err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	var results []bson.M
-
-	if err = cursor.All(context.TODO(), &results); err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	fmt.Println("Displaying all received requests:")
-
-	for _, result := range results {
-		fmt.Println(result)
-	}
+func (db *MDB) GetServiceCollection() *mongo.Collection {
+	return db.Dbcli.Database("open311db").Collection("services")
 
 }
 
-func MongoInsertServiceRequest(c mongo.Client, req models.Open311ServiceRequest) {
+// create connection
 
-	if err := c.Ping(context.TODO(), readpref.Primary()); err != nil {
-		telemetry.LogError(err, "storage")
-		panic(err)
-	}
-
-	requestCollection := c.Database("open311").Collection("requests")
-
-	_, err = requestCollection.InsertOne(context.TODO(), &req)
+func DbConnect(dsn string) (DBInterface, error) {
+	client, err := NewDatabase(dsn)
 
 	if err != nil {
-		telemetry.LogError(err, "storage")
-		log.Fatalln("Error inserting document", err)
+		return nil, err
 	}
-} */
+
+	return &MDB{
+		Dbcli: client,
+	}, nil
+}
+
+// get mongodb client
+
+func NewDatabase(dsn string) (*mongo.Client, error) {
+	ctx, cancel := context.WithTimeout(context.Background()), 10*time.Second())
+
+	defer cancel()
+
+	clientOptions := options.Client().ApplyURI(dsn)
+
+	client, err := mongo.Connect(ctx, clientOptions)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := client.Ping(ctx, nil); err != nil {
+		return nil, err
+	}
+
+	return client, err
+
+}
+

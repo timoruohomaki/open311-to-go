@@ -4,6 +4,7 @@ import (
 	//	"encoding/json"
 	//	"net/http"
 	"encoding/json"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"sync"
 	"time"
 	// "golang.org/x/text/internal/language"
@@ -55,25 +56,33 @@ type ServerTime struct {
 // open311 data structures
 // resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
+type Open311Service struct {
+	ID   primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Name string             `json:"name,omitempty" bson:"name,omitempty" xml:"name"`
+}
+
 type Open311ServiceRequest struct {
-	jurisdiction_id int `json:"jurisdiction_id"`
-	service_code    int `json:"service_code"`
+	ID              primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Jurisdiction_id int                `json:"jurisdiction_id"`
+	Service_code    int                `json:"service_code"`
 }
 
 type Open311ServiceRequestResponse struct {
-	Service_request_id int    `json:"serviceRequestId"`
-	Service_notice     int    `json:"serviceNotice"`
-	Account_id         string `json:"accountId"`
+	ID                 primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Service_request_id int                `json:"serviceRequestId"`
+	Service_notice     int                `json:"serviceNotice"`
+	Account_id         string             `json:"accountId"`
 }
 
 type CesSchema struct {
-	Question_id   int    `json:"question_id"`
-	Rating_id     int    `json:"rating_id"`
-	CesQuestion   string `json:"cesQuestion"`
-	CesQuestionId int    `json:"cesQuestionId"`
-	CesRating     string `json:"cesRating"`
-	CesComment    string `json:"cesComment"`
-	Language      string `json:"language"` // ISO 639
+	ID            primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Question_id   int                `json:"question_id"`
+	Rating_id     int                `json:"rating_id"`
+	CesQuestion   string             `json:"cesQuestion"`
+	CesQuestionId int                `json:"cesQuestionId"`
+	CesRating     string             `json:"cesRating"`
+	CesComment    string             `json:"cesComment"`
+	Language      string             `json:"language"` // ISO 639
 
 }
 

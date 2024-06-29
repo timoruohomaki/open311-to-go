@@ -1,3 +1,6 @@
+// CREDITS:
+// go-httplogger project by Gleicon Moraes https://github.com/gleicon/go-httplogger/tree/master
+
 package telemetry
 
 import (
@@ -41,7 +44,7 @@ func (w *stResponseWriter) Write(b []byte) (int, error) {
 }
 
 func WriteAccessLog(apacherow string) {
-	logf, err := os.OpenFile("c:\\Open311Logs\\open311-access.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	logf, err := os.OpenFile("c:\\Open311Logs\\open311-access.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644) // TODO read path from env
 
 	if err != nil {
 		Logger.Error("Failed to create access log file. ", err)
