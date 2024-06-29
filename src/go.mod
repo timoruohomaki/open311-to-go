@@ -1,6 +1,6 @@
 module github.com/timoruohomaki/open311togo
 
-go 1.22.2
+go 1.22
 
 require (
 	github.com/getsentry/sentry-go v0.27.0
