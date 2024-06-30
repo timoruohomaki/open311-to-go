@@ -67,6 +67,9 @@ type Open311ServiceRequest struct {
 	Service_code    int                `json:"service_code"`
 }
 
+type CreateUpdateServiceRequest struct {
+}
+
 type Open311ServiceRequestResponse struct {
 	ID                 primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
 	Service_request_id int                `json:"serviceRequestId"`
