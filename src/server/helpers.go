@@ -15,6 +15,7 @@ import (
 
 func HandleGetTime(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("api-version", "v1")
 	w.Write([]byte(models.GetServerTime()))
 
 }

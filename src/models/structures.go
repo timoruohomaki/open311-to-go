@@ -24,7 +24,7 @@ func GetServerTime() (result string) {
 		SqlDateTime: formattedTime,
 		TimeZone:    tzinfo,
 		IsDST:       true,
-		Info:        "",
+		Info:        "api.spatialworks.fi",
 	}
 
 	s, _ := json.Marshal(t)
