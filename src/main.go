@@ -35,6 +35,8 @@ func main() {
 
 	err := (srv.ListenAndServe())
 
+	// err := (srv.ListenAndServeTLS(os.Getenv("open311TLScertFile"), os.Getenv("open311TLSkeyFile")))
+
 	if err != nil {
 		telemetry.Logger.Error("Failed to start open311 API service.")
 	} else {

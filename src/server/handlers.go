@@ -7,6 +7,11 @@ import (
 	// "strconv"
 )
 
+// Open311 expected errors:
+// 404 - jurisdiction_id provided was not found (specify in error response)
+// 400 - jurisdiction_id was not provided (specify in error response)
+// 400 - General service error (Anything that fails during service list processing. The client will need to notify us)
+
 func HandleGetServicesXML(w http.ResponseWriter, r *http.Request) {
 
 	// u := r.URL.Query()
@@ -50,3 +55,20 @@ func HandleGetServicesJSON(w http.ResponseWriter, r *http.Request) {
 	   	} */
 
 }
+
+func HandleGetServiceDefinitionXML(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func HandleGetServiceDefinitionJSON(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func HandlePostServiceDefinitionXML(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func HandlePostServiceDefinitionJSON(w http.ResponseWriter, r *http.Request) {
+
+}
+

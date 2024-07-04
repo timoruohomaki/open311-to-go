@@ -3,48 +3,15 @@ package models
 import (
 	//	"encoding/json"
 	//	"net/http"
-	"encoding/json"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"sync"
-	"time"
+	// "sync"
+	// "time"
 	// "golang.org/x/text/internal/language"
 )
 
-// NOTE: Open311 structures follow GeoReport v2 whenever possible https://wiki.open311.org/GeoReport_v2/
+// NOTE: Open311 structures follow GeoReport v2 as feasible https://wiki.open311.org/GeoReport_v2/
 
 // helper functions
-
-func GetServerTime() (result string) {
-
-	currentTime := time.Now()
-	formattedTime := currentTime.Format(time.RFC3339)
-	tzinfo := currentTime.Location().String()
-
-	t := &ServerTime{
-		SqlDateTime: formattedTime,
-		TimeZone:    tzinfo,
-		IsDST:       true,
-		Info:        "api.spatialworks.fi",
-	}
-
-	s, _ := json.Marshal(t)
-
-	result = string(s)
-	return result
-
-}
-
-// log and telemetry
-
-type TeleLog struct {
-	mu      sync.Mutex
-	records []Record
-}
-
-type Record struct {
-	Value  []byte `json:"value"`
-	Offset uint64 `json:"offset"`
-}
 
 type ServerTime struct {
 	SqlDateTime string `json:"SQLDateTime"`
@@ -56,18 +23,55 @@ type ServerTime struct {
 // open311 data structures
 // resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
-type Open311Service struct {
-	ID   primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
-	Name string             `json:"name,omitempty" bson:"name,omitempty" xml:"name"`
+type Open311ServiceList struct {
+	ID			primitive.ObjectID	`json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Services 	[]Open311Service	`json:"services" bson:"services" xml:"services"`
 }
 
-type Open311ServiceRequest struct {
+type Open311Service struct {
+	ID   			primitive.ObjectID 	`json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	ServiceCode 	string				`json:"service_code" bson:"service_code" xml:"service_code"`
+	Name 			string             	`json:"service_name,omitempty" bson:"service_name,omitempty" xml:"service_name"`
+	Description		string				`json:"description" bson:"description" xml:"description"`
+	Metadata		bool				`json:"metadata" bson:"metadata" xml:"metadata"`
+	ServiceType		string				`json:"type" bson:"type" xml:"type"` // accepted values: realtime batch blackbox
+	Keywords		string				`json:"keywords" bson:"keywords" xml:"keywords"` // comma-separated
+	Group			string				`json:"group" bson:"group" xml:"group"`
+}
+
+// resource path https://api.city.gov/dev/v2/services/033.xml?jurisdiction_id=city.gov
+
+type Open311GetServiceDefinition struct {
+	
+}
+
+type Open311PostServiceDefinition struct {
+
+}
+
+
+// TODO / NOT SURE IF THESE WILL BE NEEDED
+
+/* type Open311ServiceRequest struct {
 	ID              primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
 	Jurisdiction_id int                `json:"jurisdiction_id"`
 	Service_code    int                `json:"service_code"`
 }
+ */
+// log and telemetry
 
-type CreateUpdateServiceRequest struct {
+/* type TeleLog struct {
+	mu      sync.Mutex
+	records []Record
+}
+
+type Record struct {
+	Value  []byte `json:"value"`
+	Offset uint64 `json:"offset"`
+}
+ */
+
+/* type CreateUpdateServiceRequest struct {
 }
 
 type Open311ServiceRequestResponse struct {
@@ -88,10 +92,10 @@ type CesSchema struct {
 	Language      string             `json:"language"` // ISO 639
 
 }
-
+ */
 // geospatial structures
 
-type SpatialGeometry struct {
+/* type SpatialGeometry struct {
 	// json as in GeoJSON (RFC 7946)
 
 	Id           int       `json:"id"`
@@ -105,18 +109,18 @@ type SpatialFeature struct {
 	AuthorityResourceURI string          `json:"authorityResourceURI"`
 	FeatureType          string          `json:"featureType"`
 	FeatureGeometry      SpatialGeometry `json:"featureGeometry"`
-}
+} */
 
-type CustomFeatureProperties struct {
+/* type CustomFeatureProperties struct {
 	Id int `json:"id"`
 }
 
 type KeyName struct {
 	Key  string `json:"key"`
 	Name string `json:"name"`
-}
+} */
 
-type ServiceDefinitionAttribute struct {
+/* type ServiceDefinitionAttribute struct {
 	Variable             string    `json:"variable"`
 	Code                 string    `json:"code"`
 	Datatype             string    `json:"datatype"`
@@ -126,10 +130,10 @@ type ServiceDefinitionAttribute struct {
 	Description          string    `json:"description"`
 	Values               []KeyName `json:"values"`
 }
-
+ */
 // as in https://docs.ogc.org/is/18-088/18-088.html#featureofinterest
 
-type FeatureOfInterest struct {
+/* type FeatureOfInterest struct {
 	Id                  int                     `json:"id"`
 	Name                string                  `json:"name"`
 	Description         string                  `json:"description"`
@@ -143,7 +147,7 @@ type ServiceDefinition struct {
 	PTV_code_URI string                     `json:"ptvCodeURI"`
 	Attribute    ServiceDefinitionAttribute `json:"attributeList"`
 }
-
+ */
 /*
 type Defaults struct {
 	mongoServiceCollection string

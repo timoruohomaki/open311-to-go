@@ -8,15 +8,36 @@ import (
 	//	"github.com/timoruohomaki/open311togo/telemetry"
 	"encoding/json"
 	"net/http"
+	"time"
 	// "strconv"
 )
 
 // open311/rest/v1/time
 
+func GetServerTime() (result string) {
+
+	currentTime := time.Now()
+	formattedTime := currentTime.Format(time.RFC3339)
+	tzinfo := currentTime.Location().String()
+
+	t := &models.ServerTime{
+		SqlDateTime: formattedTime,
+		TimeZone:    tzinfo,
+		IsDST:       true,
+		Info:        "api.spatialworks.fi",
+	}
+
+	s, _ := json.Marshal(t)
+
+	result = string(s)
+	return result
+
+}
+
 func HandleGetTime(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("api-version", "v1")
-	w.Write([]byte(models.GetServerTime()))
+	w.Write([]byte(GetServerTime()))
 
 }
 
@@ -33,6 +54,13 @@ func WriteJson(w http.ResponseWriter, status int, v any) {
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(v)
 }
+
+func WriteXml(w http.ResponseWriter, status int, v any) {
+	w.Header().Set("Content-Type", "text/xml")
+	w.WriteHeader(status)
+	// json.NewEncoder(w).Encode(v)
+}
+
 
 func StatusOK(w http.ResponseWriter, data any) {
 	WriteJson(w, http.StatusOK, Message{
