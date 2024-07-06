@@ -37,6 +37,7 @@ Due to the experimental nature of this implementation, the schema for service re
 * [x]  Apache Combined Log Format on access logs
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
+* [ ]  MongoDB database backend
 * [ ]  Security (TLS, authentication, authorization)
 * [ ]  Schema validation on XML messages
 * [ ]  GET Service List (xml and json)
