@@ -33,7 +33,7 @@ Due to the experimental nature of this implementation, the schema for service re
 ## Implementation Status
 
 * [ ]  Service Discovery
-* [*]  Observability
+* [x]  Observability (Sentry)
 * [ ]  Security (TLS, authentication, authorization)
 * [ ]  GET Service List
 * [ ]  GET Service Definition
