@@ -35,12 +35,12 @@ Due to the experimental nature of this implementation, the schema for service re
 * [ ]  Service Discovery
 * [x]  Observability (Sentry)
 * [ ]  Security (TLS, authentication, authorization)
-* [ ]  GET Service List
-* [ ]  GET Service Definition
-* [ ]  POST Service Request
-* [ ]  GET Service Request Id
-* [ ]  GET Service Requests
-* [ ]  GET Service Request
+* [ ]  GET Service List (xml and json)
+* [ ]  GET Service Definition (xml and json)
+* [ ]  POST Service Request (xml and json)
+* [ ]  GET Service Request Id (xml and json)
+* [ ]  GET Service Requests (xml and json)
+* [ ]  GET Service Request (xml and json)
 
 ## What is the motivation for this?
 
