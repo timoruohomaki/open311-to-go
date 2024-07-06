@@ -30,6 +30,18 @@ Due to the experimental nature of this implementation, the schema for service re
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
 
+## Implementation Status
+
+* [ ]  Service Discovery
+* [*]  Observability
+* [ ]  Security (TLS, authentication, authorization)
+* [ ]  GET Service List
+* [ ]  GET Service Definition
+* [ ]  POST Service Request
+* [ ]  GET Service Request Id
+* [ ]  GET Service Requests
+* [ ]  GET Service Request
+
 ## What is the motivation for this?
 
 This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running by the end of 2024.
