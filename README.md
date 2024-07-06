@@ -1,3 +1,5 @@
+[![Go](https://github.com/timoruohomaki/open311-to-go/actions/workflows/go.yml/badge.svg)](https://github.com/timoruohomaki/open311-to-go/actions/workflows/go.yml)
+
 # Open311-to-Go
 
 
