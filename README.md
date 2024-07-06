@@ -32,6 +32,7 @@ Due to the experimental nature of this implementation, the schema for service re
 
 ## Implementation Status
 
+* [x]  Apache Combined Log Format on access logs
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
 * [ ]  Security (TLS, authentication, authorization)
@@ -49,4 +50,5 @@ This work is to support my master's thesis work on large scale asset management 
 
 ## Credits
 
-This work heavily relies on the concept of distributed services Travis Jeffery provided in his book [Distributed Services with Go](https://a.co/d/g5mhjd8).
+* This work heavily relies on the concept of distributed services Travis Jeffery provided in his book [Distributed Services with Go](https://a.co/d/g5mhjd8).
+* Credits also to Ishan Shrestha on RestAPI and MongoDB best practises, [blog here](https://medium.com/@ishan.shrestha356/scalable-json-restapi-using-go-lang-and-mongodb-cf9699c5f6e8)
