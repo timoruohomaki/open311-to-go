@@ -17,3 +17,17 @@ Configuration parameters are stored as environment variables. In Windows they ca
 
 >[!TIP]
 >While it is year 2024, it still might be required to reboot your Windows 10 after setting environmental variables. 
+
+## Driver Packages
+
+```
+go get -u go.uber.org/zap     
+go get github.com/google/uuid     
+go get github.com/cloudflare/cfssl/cmd/cfssl  
+go get github.com/cloudflare/cfssl/cmd/cfssl    
+go get github.com/cloudflare/cfssl/cmd/cfssljson
+go get go.mongodb.org/mongo-driver/mongo
+go get go.mongodb.org/mongo-driver/collections
+go get go.mongodb.org/mongo-driver/options
+go get github.com/hashicorp/serf/serf@v0.10.1
+```
