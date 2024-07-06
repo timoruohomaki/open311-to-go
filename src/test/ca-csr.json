@@ -1,0 +1,17 @@
+{
+    "CN": "Onsite CA",
+    "key": {
+        "algo": "rsa",
+        "size": 2048,
+    },
+    "names": [
+        {
+            "C": "Finland",
+            "L": "Tampere",
+            "ST": "Pirkanmaa",
+            "O": "Spatial Works",
+            "OU": "CA Services"
+        }
+    ]
+
+}

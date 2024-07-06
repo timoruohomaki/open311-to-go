@@ -18,6 +18,8 @@ func main() {
 
 	fmt.Println("Starting server, current time is " + currentTime.Format(time.RFC3339))
 
+	fmt.Println("UUID: " + server.GetUUID())
+
 	// initialize logging and connect Sentry telemetry with or without performance monitoring
 
 	telemetry.InitLog("INFO")

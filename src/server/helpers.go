@@ -9,8 +9,19 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
+	"github.com/google/uuid"
 	// "strconv"
 )
+
+// generate RFC 4122 compliant UUID
+
+func GetUUID() (string) {
+
+	uuid := uuid.New()
+
+	return uuid.String()
+
+}
 
 // open311/rest/v1/time
 
