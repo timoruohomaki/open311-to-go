@@ -4,7 +4,7 @@ import (
 	// "github.com/timoruohomaki/open311togo/models"
 	//	"github.com/timoruohomaki/open311togo/telemetry"
 	"net/http"
-	// "strconv"
+	"strconv"
 )
 
 // Open311 expected errors:
@@ -12,31 +12,31 @@ import (
 // 400 - jurisdiction_id was not provided (specify in error response)
 // 400 - General service error (Anything that fails during service list processing. The client will need to notify us)
 
-func HandleGetServicesXML(w http.ResponseWriter, r *http.Request) {
+func HandleGetServiceListXML(w http.ResponseWriter, r *http.Request) {
 
-	// u := r.URL.Query()
+	u := r.URL.Query()
 
-	// jid_str := u["jurisdiction_id"]
+	jid_str := u["jurisdiction_id"]
 
-	// jid, err := strconv.Atoi([]jid_str)
+	jid, err := strconv.Atoi([]jid_str)
 
-	// if err != nil {
-	// 	if jid > 0 {
+	if err != nil {
+		if jid > 0 {
 
-	// 	} else {
-	// 		// return 404 error with message "Jurisdiction with provided ID was not found."
-	// 	}
+		} else {
+			// return 404 error with message "Jurisdiction with provided ID was not found."
+		}
 
-	// } else {
-	// 	// return 400 error with message "Jurisdiction ID was not provided"
+	} else {
+		// return 400 error with message "Jurisdiction ID was not provided"
 
-	// }
+	}
 
 }
 
-func HandleGetServicesJSON(w http.ResponseWriter, r *http.Request) {
+func HandleGetServiceListJSON(w http.ResponseWriter, r *http.Request) {
 
-	/* 	u := r.URL.Query()
+		u := r.URL.Query()
 
 	   	jid_str := u["jurisdiction_id"]
 
@@ -52,7 +52,7 @@ func HandleGetServicesJSON(w http.ResponseWriter, r *http.Request) {
 	   	} else {
 	   		// return 400 error with message "Jurisdiction ID was not provided"
 
-	   	} */
+	   	}
 
 }
 
@@ -71,4 +71,6 @@ func HandlePostServiceDefinitionXML(w http.ResponseWriter, r *http.Request) {
 func HandlePostServiceDefinitionJSON(w http.ResponseWriter, r *http.Request) {
 
 }
+
+
 

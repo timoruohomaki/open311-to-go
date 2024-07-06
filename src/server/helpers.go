@@ -35,6 +35,7 @@ func GetServerTime() (result string) {
 		SqlDateTime: formattedTime,
 		TimeZone:    tzinfo,
 		IsDST:       true,
+		UID:		GetUUID(),
 		Info:        "api.spatialworks.fi",
 	}
 

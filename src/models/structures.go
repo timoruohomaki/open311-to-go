@@ -17,6 +17,7 @@ type ServerTime struct {
 	SqlDateTime string `json:"SQLDateTime"`
 	TimeZone    string `json:"TimeZone"`
 	IsDST       bool   `json:"DST"`
+	UID		string `json:"UID`
 	Info        string `json:"Info"`
 }
 
@@ -34,7 +35,7 @@ type Open311Service struct {
 	Name 			string             	`json:"service_name,omitempty" bson:"service_name,omitempty" xml:"service_name"`
 	Description		string				`json:"description" bson:"description" xml:"description"`
 	Metadata		bool				`json:"metadata" bson:"metadata" xml:"metadata"`
-	ServiceType		string				`json:"type" bson:"type" xml:"type"` // accepted values: realtime batch blackbox
+	ServiceType		string				`json:"type" bson:"type" xml:"type"` // accepted values: realtime | batch | blackbox, likely all will be realtime
 	Keywords		string				`json:"keywords" bson:"keywords" xml:"keywords"` // comma-separated
 	Group			string				`json:"group" bson:"group" xml:"group"`
 }

@@ -1,5 +1,6 @@
 // CREDITS:
 // go-httplogger project by Gleicon Moraes https://github.com/gleicon/go-httplogger/tree/master
+// more on log formats: https://www.sumologic.com/blog/apache-access-log/
 
 package telemetry
 
@@ -78,6 +79,7 @@ func HTTPLogger(handler http.Handler) http.Handler {
 		handler.ServeHTTP(&interceptWriter, r)
 
 		// write access log row
+		// Apache Combined Log Format
 
 		var s strings.Builder
 		s.WriteString("HTTP - ")

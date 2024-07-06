@@ -10,10 +10,21 @@ import (
 	"github.com/timoruohomaki/open311togo/telemetry"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-
+ "go.mongodb.org/mongo-driver/bson/primitive"
 	//"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
+
+// database repository
+
+type DbMethod interface {
+	CreateService( s *models.CreateUpdateService) (*models.Open311Service, error)
+	GetServices(limit, page int) ([]*models.Open311Service, error)
+	GetService(id primitive.ObjectID) (*models.Open311Service, error)
+	DeleteService(id primitive.ObjectID)
+	UpdateService(id primitive.ObjectID, update *models.Open311Service) error
+
+}
 
 // database interface
 
