@@ -35,6 +35,7 @@ Due to the experimental nature of this implementation, the schema for service re
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
 * [ ]  Security (TLS, authentication, authorization)
+* [ ]  Schema validation on XML messages
 * [ ]  GET Service List (xml and json)
 * [ ]  GET Service Definition (xml and json)
 * [ ]  POST Service Request (xml and json)
