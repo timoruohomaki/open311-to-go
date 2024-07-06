@@ -34,6 +34,7 @@ Due to the experimental nature of this implementation, the schema for service re
 
 ## Implementation Status
 
+* [x]  Github action for Ubuntu ci/cd pipeline
 * [x]  Apache Combined Log Format on access logs
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
