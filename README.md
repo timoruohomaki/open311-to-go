@@ -19,16 +19,29 @@ This implementation inludes the additions the City of Helsinki added on Open311,
 
 Source: https://dev.hel.fi/apis/open311 
 
-This implementation also uses MongoDB as a backend, also utilizing its spatial functions.
+This implementation also uses MongoDB as a backend, also utilizing its spatial functions. XML formats are supported with schemas.
 
 Due to the experimental nature of this implementation, the schema for service request is extended with inline properties object, containing user-annotated properties as key-value pairs. This approach makes it possible to support use cases where there are additional properties in the service request, e.g. because of supporting a specific standard such as the Finnish PSK 5970 that defines the schema for data record of cases and events. With this approach, the goal is to link citizen feedback with ISO 55000 asset management practises.
 
 ## Development framework and versions
 
-* This work uses golang version 1.22.2. Due to recent development on the Go http/router package the latest version available is required.
+* This work uses golang version 1.22.5. Due to recent development on the Go net/http on routing a version of 1.22 or newer is required.
 * The API will be deployed as an Azure Function because it will then be easier to transfer to production platform.
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
+
+## Implementation Status
+
+* [ ]  Service Discovery (Serf)
+* [x]  Observability (Sentry)
+* [ ]  Security (TLS, authentication, authorization)
+* [ ]  Schema validation on XML messages
+* [ ]  GET Service List (xml and json)
+* [ ]  GET Service Definition (xml and json)
+* [ ]  POST Service Request (xml and json)
+* [ ]  GET Service Request Id (xml and json)
+* [ ]  GET Service Requests (xml and json)
+* [ ]  GET Service Request (xml and json)
 
 ## What is the motivation for this?
 
