@@ -22,7 +22,7 @@ jobs:
         go-version: '1.22.x'
 
     - name: Build
-      run: go build -C /src -o /home/apiuser/gobuild -v 
+      run: go build -C /home/apiuser/actions-runner/_work/open311-to-go/open311-to-go/src -o /home/apiuser/gobuild -v 
 
 #    - name: Test
 #      run: go test -v src/...
