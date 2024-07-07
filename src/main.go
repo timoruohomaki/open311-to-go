@@ -12,6 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"os" */)
 
+	
 func main() {
 
 	currentTime := time.Now()
