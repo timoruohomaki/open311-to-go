@@ -22,7 +22,7 @@ jobs:
         go-version: '1.22.x'
 
     - name: Build
-      run: go build -v -o /home/apiuser/gobuild src/... 
+      run: go build -o /home/apiuser/gobuild -pkgdir src/... -v 
 
 #    - name: Test
 #      run: go test -v src/...
