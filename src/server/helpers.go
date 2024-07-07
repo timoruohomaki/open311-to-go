@@ -11,6 +11,7 @@ import (
 	"time"
 	"github.com/google/uuid"
 	// "strconv"
+	    "github.com/thlib/go-timezone-local/tzlocal"
 )
 
 // generate RFC 4122 compliant UUID
@@ -29,7 +30,8 @@ func GetServerTime() (result string) {
 
 	currentTime := time.Now()
 	formattedTime := currentTime.Format(time.RFC3339)
-	tzinfo := currentTime.Location().String()
+
+	tzinfo, _ := tzlocal.RuntimeTZ() //TODO Maybe some error handling
 
 	t := &models.ServerTime{
 		SqlDateTime: formattedTime,
