@@ -7,5 +7,8 @@ startContainer:
 stopContainer:
 	docker stop MongoDBCRUD
 
+build:
+	go build -v -o ../build
+
 run:
 	go run main.go
