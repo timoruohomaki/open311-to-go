@@ -39,8 +39,8 @@ func InitLog(level string) {
 	zapConfig.Development = false
 	zapConfig.Encoding = "json"
 	zapConfig.InitialFields = map[string]interface{}{"release": "105", "ProcessID": os.Getpid(), "Hostname": hostname}
-	zapConfig.OutputPaths = []string{"stdout", "c:\\Open311Logs\\open311-runtime.log"}
-	zapConfig.ErrorOutputPaths = []string{"stdout"}
+	zapConfig.OutputPaths = []string{"stderr"}
+	zapConfig.ErrorOutputPaths = []string{"stderr"}
 
 	logger, err := zapConfig.Build()
 
