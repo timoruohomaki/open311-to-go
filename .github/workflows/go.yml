@@ -21,9 +21,9 @@ jobs:
       with:
         go-version: '1.22.x'
     - name: Install dependencies
-      run: go get .
+      run: go install .
     - name: Build
-      run: go build -v -o /home/apiuser/gobuild
+      run: go build -v src/..
 
 #    - name: Test
 #      run: go test -v src/...
