@@ -3,6 +3,8 @@ package models
 import (
 	//	"encoding/json"
 	//	"net/http"
+	"encoding/xml"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	// "sync"
 	// "time"
@@ -25,8 +27,9 @@ type ServerTime struct {
 // resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
 type Open311ServiceList struct {
+	XMLName		xml.Name			`xml:"serviceList"`
 	ID			primitive.ObjectID	`json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
-	Services 	[]Open311Service	`json:"services" bson:"services" xml:"services"`
+	Services 	[]Open311Service	`json:"services" bson:"services" xml:"services>service"`
 }
 
 type Open311Service struct {

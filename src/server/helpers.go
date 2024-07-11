@@ -5,13 +5,13 @@ package server
 
 import (
 	"github.com/timoruohomaki/open311togo/models"
-	//	"github.com/timoruohomaki/open311togo/telemetry"
+	"github.com/timoruohomaki/open311togo/telemetry"
 	"encoding/json"
 	"net/http"
 	"time"
 	"github.com/google/uuid"
 	// "strconv"
-	    "github.com/thlib/go-timezone-local/tzlocal"
+	"github.com/thlib/go-timezone-local/tzlocal"
 )
 
 // generate RFC 4122 compliant UUID
@@ -31,7 +31,11 @@ func GetServerTime() (result string) {
 	currentTime := time.Now()
 	formattedTime := currentTime.Format(time.RFC3339)
 
-	tzinfo, _ := tzlocal.RuntimeTZ() //TODO Maybe some error handling
+	tzinfo, err := tzlocal.RuntimeTZ() //TODO Maybe some error handling
+
+	if err != nil {
+		telemetry.Logger.Error("Failed to get timezone information.")
+	}
 
 	t := &models.ServerTime{
 		SqlDateTime: formattedTime,

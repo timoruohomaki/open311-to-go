@@ -45,10 +45,14 @@ func (w *stResponseWriter) Write(b []byte) (int, error) {
 }
 
 func WriteAccessLog(apacherow string) {
-	logf, err := os.OpenFile("c:\\Open311Logs\\open311-access.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644) // TODO read path from env
+
+	logPath := os.Getenv("LOGPATH")
+
+	logf, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 
 	if err != nil {
-		Logger.Error("Failed to create access log file. ", err)
+		Logger.Error("Failed to create access log file: ", err)
+		fmt.Println(logPath)
 		return
 	}
 
@@ -80,6 +84,7 @@ func HTTPLogger(handler http.Handler) http.Handler {
 
 		// write access log row
 		// Apache Combined Log Format
+		// TODO Counld also support the shorter format
 
 		var s strings.Builder
 		s.WriteString("HTTP - ")

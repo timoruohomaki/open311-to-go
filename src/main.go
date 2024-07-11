@@ -12,14 +12,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"os" */)
 
-	
+
 func main() {
 
 	currentTime := time.Now()
 
-	fmt.Println("Starting server, current time is " + currentTime.Format(time.RFC3339))
+	fmt.Println("Starting API listener service at " + currentTime.Format(time.RFC3339))
 
-	fmt.Println("UUID: " + server.GetUUID())
+	fmt.Println("Session UUID: " + server.GetUUID())
 
 	// initialize logging and connect Sentry telemetry with or without performance monitoring
 
