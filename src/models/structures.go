@@ -20,7 +20,7 @@ type ServerTime struct {
 	TimeZone    string `json:"TimeZone"`
 	IsDST       bool   `json:"DST"`
 	UID		string `json:"UID`
-	Message        string `json:"Info"`
+	Message        string `json:"Message"`
 }
 
 // open311 data structures
