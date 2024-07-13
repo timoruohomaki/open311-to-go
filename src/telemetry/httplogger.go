@@ -84,7 +84,7 @@ func HTTPLogger(handler http.Handler) http.Handler {
 
 		// write access log row
 		// Apache Combined Log Format
-		// TODO Counld also support the shorter format
+		// TODO Could also support the shorter format
 
 		var s strings.Builder
 		s.WriteString("HTTP - ")
