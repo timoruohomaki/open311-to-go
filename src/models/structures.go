@@ -23,6 +23,16 @@ type ServerTime struct {
 	Message        string `json:"Message"`
 }
 
+// Message struct holds the response information when client calls an API
+
+type Message struct {
+	Status  string `json:"status"`
+	Message string `json:"message,omitempty"`
+	Limit   int    `json:"limit,omitempty"`
+	Page    int    `json:"page,omitempty"`
+	Data    any    `json:"data,omitempty"`	
+}
+
 // open311 data structures
 // resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
@@ -44,6 +54,10 @@ type Open311Service struct {
 }
 
 // resource path https://api.city.gov/dev/v2/services/033.xml?jurisdiction_id=city.gov
+
+type Open311CreateUpdateService struct {
+	ServiceCode		string		`json:"service_code"`
+}
 
 type Open311GetServiceDefinition struct {
 	

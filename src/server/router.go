@@ -21,8 +21,8 @@ func Init(address string) *http.Server {
 	// GET Service list, jurisdiction required
 	// example: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
-	mux.HandleFunc("GET /open311/rest/v1/services.xml", HandleGetServiceListXML)
-	mux.HandleFunc("GET /open311/rest/v1/services.json", HandleGetServiceListJSON)
+	// mux.HandleFunc("GET /open311/rest/v1/services.xml", HandleGetServiceListXML)
+	// mux.HandleFunc("GET /open311/rest/v1/services.json", HandleGetServiceListJSON)
 
 	// GET Service definition
 	// example: https://api.city.gov/dev/v2/services/033.xml?jurisdiction_id=city.gov

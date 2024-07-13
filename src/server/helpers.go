@@ -86,6 +86,36 @@ func WriteXml(w http.ResponseWriter, status int, v any) {
 // 400 - jurisdiction_id was not provided (specify in error response)
 // 400 - General service error (Anything that fails during service list processing. The client will need to notify us)
 
+func StatusCreated(w http.ResponseWriter, data any) {
+	WriteJson(w, http.StatusCreated, Message{
+	 Status: "success",
+	 Data:   data,
+	})
+}
+
+func StatusAcceptedData(w http.ResponseWriter, data any) {
+	WriteJson(w, http.StatusAccepted, Message{
+	 Status: "success",
+	 Data:   data,
+	})
+}
+
+func StatusAcceptedMsg(w http.ResponseWriter, msg string) {
+	WriteJson(w, http.StatusAccepted, Message{
+	 Status:  "success",
+	 Message: msg,
+	})
+}
+
+func StatusOKAll(w http.ResponseWriter, limit, page int, data any) {
+	WriteJson(w, http.StatusOK, Message{
+	 Status: "success",
+	 Limit:  limit,
+	 Page:   page,
+	 Data:   data,
+	})
+}
+
 func StatusOK(w http.ResponseWriter, data any) {
 	WriteJson(w, http.StatusOK, Message{
 		Status: "success",
@@ -94,6 +124,7 @@ func StatusOK(w http.ResponseWriter, data any) {
 }
 
 func StatusInternalServerError(w http.ResponseWriter, err string) {
+	telemetry.Logger.Error(err)
 	WriteJson(w, http.StatusInternalServerError, Message{
 		Status: "error",
 		Data:   err,

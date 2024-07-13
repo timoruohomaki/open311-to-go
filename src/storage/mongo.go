@@ -23,12 +23,11 @@ type DbMethod interface {
 	GetService(id primitive.ObjectID) (*models.Open311Service, error)
 	DeleteService(id primitive.ObjectID)
 	UpdateService(id primitive.ObjectID, update *models.Open311Service) error
-
 }
 
 // database interface
 
-type DBInterface interface {
+type DbInterface interface {
 	GetServiceCollection() *mongo.Collection
 }
 
@@ -43,7 +42,7 @@ func (db *MDB) GetServiceCollection() *mongo.Collection {
 
 // create connection
 
-func DbConnect(dsn string) (DBInterface, error) {
+func ConnectToNoSql(dsn string) (DBInterface, error) {
 	client, err := NewDatabase(dsn)
 
 	if err != nil {
