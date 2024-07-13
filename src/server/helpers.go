@@ -42,7 +42,7 @@ func GetServerTime() (result string) {
 		TimeZone:    tzinfo,
 		IsDST:       true,
 		UID:		GetUUID(),
-		Info:        "api.spatialworks.fi",
+		Message:	"api.spatialworks.fi",
 	}
 
 	s, _ := json.Marshal(t)
