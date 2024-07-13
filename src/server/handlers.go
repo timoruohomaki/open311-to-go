@@ -7,10 +7,15 @@ import (
 	// "strconv"
 )
 
-// Open311 expected errors:
-// 404 - jurisdiction_id provided was not found (specify in error response)
-// 400 - jurisdiction_id was not provided (specify in error response)
-// 400 - General service error (Anything that fails during service list processing. The client will need to notify us)
+type Handlers interface {
+	
+}
+
+type handler struct {
+
+}
+
+
 
 func HandleGetServiceListXML(w http.ResponseWriter, r *http.Request) {
 

@@ -79,10 +79,44 @@ func WriteXml(w http.ResponseWriter, status int, v any) {
 	// json.NewEncoder(w).Encode(v)
 }
 
+// HTTP status responses
+
+// Open311 expected errors:
+// 404 - jurisdiction_id provided was not found (specify in error response)
+// 400 - jurisdiction_id was not provided (specify in error response)
+// 400 - General service error (Anything that fails during service list processing. The client will need to notify us)
 
 func StatusOK(w http.ResponseWriter, data any) {
 	WriteJson(w, http.StatusOK, Message{
 		Status: "success",
 		Data:   data,
+	})
+}
+
+func StatusInternalServerError(w http.ResponseWriter, err string) {
+	WriteJson(w, http.StatusInternalServerError, Message{
+		Status: "error",
+		Data:   err,
+	})
+}
+
+func StatusBadRequest(w http.ResponseWriter, err string) {
+	WriteJson(w, http.StatusBadRequest, Message{
+		Status: "error",
+		Data:   err,
+	})
+}
+
+func StatusBadGateway(w http.ResponseWriter, err string) {
+	WriteJson(w, http.StatusBadGateway, Message{
+		Status: "error",
+		Data:   err,
+	})
+}
+
+func StatusNotFound(w http.ResponseWriter, err string) {
+	WriteJson(w, http.StatusNotFound, Message{
+		Status: "error",
+		Data:   err,
 	})
 }
