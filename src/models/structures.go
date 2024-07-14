@@ -15,11 +15,14 @@ import (
 
 // helper functions
 
+const MainVersion = "108"
+
 type ServerTime struct {
 	SqlDateTime string `json:"SQLDateTime"`
 	TimeZone    string `json:"TimeZone"`
 	IsDST       bool   `json:"DST"`
 	UID		string `json:"UID`
+	Version		string	`json:"Version"`
 	Message        string `json:"Message"`
 }
 

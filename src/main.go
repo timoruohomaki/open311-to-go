@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	// "github.com/timoruohomaki/open311togo/models"
+	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
 	"time"
 	// "github.com/timoruohomaki/open311togo/storage"
@@ -12,12 +12,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"os" */)
 
-
 func main() {
 
 	currentTime := time.Now()
 
-	fmt.Println("Starting API listener service at " + currentTime.Format(time.RFC3339))
+	fmt.Println("Starting API listener service version " + models.MainVersion + " at " + currentTime.Format(time.RFC3339))
 
 	fmt.Println("Session UUID: " + server.GetUUID())
 

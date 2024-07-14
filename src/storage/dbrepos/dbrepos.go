@@ -14,7 +14,7 @@ type mongoDbRepo struct {
 func NewMongoDbRepo(client storage.DbInterface, ctx context.Context) storage.DbMethod {
 	return &mongoDbRepo{
 		Client: client,
-		ctx:	ctx.
+		ctx:	ctx,
 	}
 }
 

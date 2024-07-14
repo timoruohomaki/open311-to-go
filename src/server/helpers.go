@@ -42,6 +42,7 @@ func GetServerTime() (result string) {
 		TimeZone:    tzinfo,
 		IsDST:       true,
 		UID:		GetUUID(),
+		Version:	main.MainVersion
 		Message:	"api.spatialworks.fi",
 	}
 

@@ -4,6 +4,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
+	"github.com/timoruohomaki/open311togo/models"
 	// lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -38,7 +39,7 @@ func InitLog(level string) {
 	zapConfig.Level = zapLevel
 	zapConfig.Development = false
 	zapConfig.Encoding = "json"
-	zapConfig.InitialFields = map[string]interface{}{"release": "107", "ProcessID": os.Getpid(), "Hostname": hostname}
+	zapConfig.InitialFields = map[string]interface{}{"release": models.MainVersion, "ProcessID": os.Getpid(), "Hostname": hostname}
 	zapConfig.OutputPaths = []string{"stderr"}
 	zapConfig.ErrorOutputPaths = []string{"stderr"}
 
