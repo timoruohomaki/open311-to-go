@@ -84,7 +84,7 @@ func (m *mongoDbRepo) DeleteService(id primitive.ObjectID) error {
 	return nil
 }
 
-func (m *mongoDbRepo) UpdateService(id primitive.ObjectID, update *models.Open311CreateUpdateService) error {
+func (m *mongoDbRepo) UpdateService(id primitive.ObjectID, update *models.Open311Service) error {
 	ctx, cancel := context.WithTimeout(m.ctx, timeout)
 	defer cancel()
 	updateQuery := bson.D{{"$set", update}}

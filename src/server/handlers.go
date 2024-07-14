@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"context"
 	"strconv"
 	"encoding/json"
 	"github.com/timoruohomaki/open311togo/models"
@@ -42,10 +43,10 @@ func (h *handler) GetServices(w http.ResponseWriter, r *http.Request) {
 	}
 	products, err := h.MG.GetServices(limit, page)
 	if err != nil {
-	 server.StatusInternalServerError(w, err.Error())
+	 StatusInternalServerError(w, err.Error())
 	 return
 	}
-	server.StatusOKAll(w, limit, page, products)
+	StatusOKAll(w, limit, page, products)
 }
 
 // Insert new Open311 Service into database
@@ -53,15 +54,15 @@ func (h *handler) GetServices(w http.ResponseWriter, r *http.Request) {
 func (h *handler) CreateService(w http.ResponseWriter, r *http.Request) {
 	p := &models.Open311CreateUpdateService{}
 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
-	 server.StatusBadRequest(w, "error parsing json")
+	 StatusBadRequest(w, "error parsing json")
 	 return
 	}
 	product, err := h.MG.CreateService(p)
 	if err != nil {
-	 server.StatusInternalServerError(w, err.Error())
+	 StatusInternalServerError(w, err.Error())
 	 return
 	}
-	server.StatusCreated(w, product)
+	StatusCreated(w, product)
    }
 
    // Get specific Service
@@ -69,15 +70,15 @@ func (h *handler) CreateService(w http.ResponseWriter, r *http.Request) {
 	idString := r.FormValue("id")
 	id, err := primitive.ObjectIDFromHex(idString)
 	if err != nil {
-	 server.StatusBadRequest(w, "invalid service id")
+	 StatusBadRequest(w, "invalid service id")
 	 return
 	}
 	product, err := h.MG.GetService(id)
 	if err != nil {
-	 server.StatusNotFound(w, err.Error())
+	 StatusNotFound(w, err.Error())
 	 return
 	}
-	server.StatusOK(w, product)
+	StatusOK(w, product)
    }
 
 // delete a service using id
@@ -85,14 +86,14 @@ func (h *handler) DeleteService(w http.ResponseWriter, r *http.Request) {
 	idString := r.FormValue("id")
 	id, err := primitive.ObjectIDFromHex(idString)
 	if err != nil {
-	 server.StatusBadRequest(w, "invalid id")
+	 StatusBadRequest(w, "invalid id")
 	 return
 	}
 	if err := h.MG.DeleteService(id); err != nil {
-	 server.StatusInternalServerError(w, err.Error())
+	 StatusInternalServerError(w, err.Error())
 	 return
 	}
-	server.StatusAcceptedMsg(w, "service deleted")
+	StatusAcceptedMsg(w, "service deleted")
    }
 
 // update a service using id
@@ -100,22 +101,22 @@ func (h *handler) UpdateService(w http.ResponseWriter, r *http.Request) {
 	idString := r.FormValue("id")
 	id, err := primitive.ObjectIDFromHex(idString)
 	if err != nil {
-	 server.StatusBadRequest(w, "invalid id")
+	 StatusBadRequest(w, "invalid id")
 	 return
 	}
-	update := &models.Open311CreateUpdateService{}
+	update := &models.Open311Service{}
 	if err := json.NewDecoder(r.Body).Decode(&update); err != nil {
-	 server.StatusBadRequest(w, "error in parsing json")
+	 StatusBadRequest(w, "error in parsing json")
 	 return
 	}
 	if err := h.MG.UpdateService(id, update); err != nil {
-	 server.StatusBadRequest(w, err.Error())
+	 StatusBadRequest(w, err.Error())
 	 return
 	}
 	service, err := h.MG.GetService(id)
 	if err != nil {
-	 server.StatusNotFound(w, err.Error())
+	 StatusNotFound(w, err.Error())
 	 return
 	}
-	server.StatusAcceptedData(w, service)
+	StatusAcceptedData(w, service)
    }

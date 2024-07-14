@@ -19,7 +19,7 @@ type DbMethod interface {
 	CreateService( s *models.Open311CreateUpdateService) (*models.Open311Service, error)
 	GetServices(limit, page int) ([]*models.Open311Service, error)
 	GetService(id primitive.ObjectID) (*models.Open311Service, error)
-	DeleteService(id primitive.ObjectID)
+	DeleteService(id primitive.ObjectID) error
 	UpdateService(id primitive.ObjectID, update *models.Open311Service) error
 }
 
