@@ -16,7 +16,7 @@ func main() {
 
 	currentTime := time.Now()
 
-	fmt.Println("Starting API listener service version " + models.MainVersion + " at " + currentTime.Format(time.RFC3339))
+	fmt.Println("Starting API listener service version " + models.BuildVersion + " at " + currentTime.Format(time.RFC3339))
 
 	fmt.Println("Session UUID: " + server.GetUUID())
 
