@@ -39,7 +39,7 @@ func InitLog(level string) {
 	zapConfig.Level = zapLevel
 	zapConfig.Development = false
 	zapConfig.Encoding = "json"
-	zapConfig.InitialFields = map[string]interface{}{"release": models.MainVersion, "ProcessID": os.Getpid(), "Hostname": hostname}
+	zapConfig.InitialFields = map[string]interface{}{"release": models.BuildVersion, "ProcessID": os.Getpid(), "Hostname": hostname}
 	zapConfig.OutputPaths = []string{"stderr"}
 	zapConfig.ErrorOutputPaths = []string{"stderr"}
 
