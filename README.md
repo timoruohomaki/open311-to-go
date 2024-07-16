@@ -27,8 +27,8 @@ Due to the experimental nature of this implementation, the schema for service re
 
 ## Development framework and versions
 
-* This work uses golang version 1.22.5. Due to recent development on the Go net/http on routing a version of 1.22 or newer is required.
-* The API will be deployed as an Azure Function because it will then be easier to transfer to production platform.
+* This work uses golang version 1.22.5. The work depends on the new Go net/http routing capabilities so a version of 1.22 or newer is required.
+* The API will eventually be deployed as an Azure Function because it will then be easier to transfer to production platform. The dev server is Ubuntu 22.04 hosted at api.spatialworks.fi
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
 
