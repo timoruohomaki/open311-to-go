@@ -57,6 +57,6 @@ This work is to support my master's thesis work on large scale asset management 
 * This work heavily relies on the concept of distributed services Travis Jeffery provided in his book [Distributed Services with Go](https://a.co/d/g5mhjd8).
 * Credits also to Ishan Shrestha on RestAPI and MongoDB best practises, [blog here](https://medium.com/@ishan.shrestha356/scalable-json-restapi-using-go-lang-and-mongodb-cf9699c5f6e8)
 
-## Notes
+
 
 [^1]: It should be always possible to continue development using the latest stable release
