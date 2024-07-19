@@ -32,13 +32,13 @@ Due to the experimental nature of this implementation, the schema for service re
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
 
-## Implementation Status
+## Implementation Status (initial implementation)
 
 * [x]  Github action for Ubuntu ci/cd pipeline
 * [x]  Apache Combined Log Format on access logs
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
-* [ ]  MongoDB database backend
+* [x]  MongoDB database backend
 * [ ]  Security (TLS, authentication, authorization)
 * [ ]  Schema validation on XML messages
 * [ ]  GET Service List (xml and json)
