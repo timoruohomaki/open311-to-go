@@ -27,18 +27,18 @@ Due to the experimental nature of this implementation, the schema for service re
 
 ## Development framework and versions
 
-* This work uses golang version 1.22.5. The work depends on the new Go net/http routing capabilities so a version of 1.22 or newer is required.
+* This work uses golang version 1.22.5 [^1]. The work depends on the new Go net/http routing capabilities so a version of 1.22 or newer is required.
 * The API will eventually be deployed as an Azure Function because it will then be easier to transfer to production platform. The dev server is Ubuntu 22.04 hosted at api.spatialworks.fi
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
 
-## Implementation Status
+## Implementation Status (initial implementation)
 
 * [x]  Github action for Ubuntu ci/cd pipeline
 * [x]  Apache Combined Log Format on access logs
 * [ ]  Service Discovery (Serf)
 * [x]  Observability (Sentry)
-* [ ]  MongoDB database backend
+* [x]  MongoDB database backend
 * [ ]  Security (TLS, authentication, authorization)
 * [ ]  Schema validation on XML messages
 * [ ]  GET Service List (xml and json)
@@ -56,3 +56,7 @@ This work is to support my master's thesis work on large scale asset management 
 
 * This work heavily relies on the concept of distributed services Travis Jeffery provided in his book [Distributed Services with Go](https://a.co/d/g5mhjd8).
 * Credits also to Ishan Shrestha on RestAPI and MongoDB best practises, [blog here](https://medium.com/@ishan.shrestha356/scalable-json-restapi-using-go-lang-and-mongodb-cf9699c5f6e8)
+
+
+
+[^1]: It should be always possible to continue development using the latest stable release
