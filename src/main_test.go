@@ -10,10 +10,10 @@ import(
 	"github.com/timoruohomaki/open311togo/server"
 )
 
-func TestOpen311(t *testing.T) {
-	// testHandler := server.Handlers.GetServices()
+func TestOpen311GetTime(t *testing.T) {
+	testHandler := server.Handlers.GetServices()
 
-	// server := httptest.NewServer(testHandler)
+	server := httptest.NewServer(testHandler)
 
 	defer server.Close()
 

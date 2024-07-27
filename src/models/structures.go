@@ -15,7 +15,7 @@ import (
 
 // helper functions
 
-const BuildVersion = "109"
+const BuildVersion = "110"
 
 type ServerTime struct {
 	SqlDateTime string `json:"SQLDateTime"`
