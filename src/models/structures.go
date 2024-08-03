@@ -17,13 +17,15 @@ import (
 
 const BuildVersion = "110"
 
+// ServerTime is returned with time -request which is for testing and heartbeat purposes
+
 type ServerTime struct {
-	SqlDateTime string `json:"SQLDateTime"`
-	TimeZone    string `json:"TimeZone"`
-	IsDST       bool   `json:"DST"`
-	UID		string `json:"UID`
-	BuildVersion		string	`json:"BuildVersion"`
-	Message        string `json:"Message"`
+	SqlDateTime 	string `json:"SQLDateTime"`
+	TimeZone    	string `json:"TimeZone"`
+	IsDST       	bool   `json:"DST"`
+	UID				string `json:"UID"`
+	BuildVersion	string	`json:"BuildVersion"`
+	Message			string `json:"Message"`
 }
 
 // Message struct holds the response information when client calls an API
