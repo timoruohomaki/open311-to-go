@@ -31,6 +31,7 @@ Due to the experimental nature of this implementation, the schema for service re
 * The API will eventually be deployed as an Azure Function because it will then be easier to transfer to production platform. The dev server is Ubuntu 22.04 hosted at api.spatialworks.fi
 * The development is done using Visual Studio Code - however it shouldn't make any difference what editor to use
 * Sentry will be used for observations.
+* API examples and tests collection is managed with [Bruno](https://www.usebruno.com/)
 
 ## Implementation Status (initial implementation)
 
