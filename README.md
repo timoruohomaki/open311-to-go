@@ -51,7 +51,7 @@ Due to the experimental nature of this implementation, the schema for service re
 
 ## What is the motivation for this?
 
-This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running by the end of 2024.
+This work is to support my master's thesis work on large scale asset management on urban digital twins. This should be up and running by the end of 2024-ish.
 
 ## Credits
 
