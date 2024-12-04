@@ -2,29 +2,44 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
-	"time"
+
 	// "github.com/timoruohomaki/open311togo/storage"
 	"github.com/timoruohomaki/open311togo/telemetry"
 	/* "go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"os" */)
+	"go.mongodb.org/mongo-driver/mongo/readpref" */
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 func main() {
-
-	currentTime := time.Now()
-
-	fmt.Println("Starting API listener service version " + models.BuildVersion + " at " + currentTime.Format(time.RFC3339))
-
-	fmt.Println("Session UUID: " + server.GetUUID())
 
 	// initialize logging and connect Sentry telemetry with or without performance monitoring
 
 	telemetry.InitLog("INFO")
 
 	defer telemetry.Logger.Sync()
+
+	err := godotenv.Load()
+
+	if err != nil {
+	  telemetry.Logger.Fatal("Error loading .env file")
+	}
+
+	currentTime := time.Now()
+
+	fmt.Println(os.Getenv("CurrentVersion"))
+
+	fmt.Println("Starting API listener service version " + models.BuildVersion + " at " + currentTime.Format(time.RFC3339))
+
+	fmt.Println("Session UUID: " + server.GetUUID())
+
+
 
 	// initialize MongoDB
 
