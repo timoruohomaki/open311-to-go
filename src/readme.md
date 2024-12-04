@@ -1,5 +1,8 @@
 # Go project
 
+## Version numbering
+Following the conventions on [Semantic Versioning](https://semver.org/).
+
 ## Environmental variables
 
 Configuration parameters are stored as environment variables. In Windows they can be managed with sysdm.cpl.
@@ -30,4 +33,5 @@ go get go.mongodb.org/mongo-driver/mongo
 go get go.mongodb.org/mongo-driver/collections
 go get go.mongodb.org/mongo-driver/options
 go get github.com/hashicorp/serf/serf@v0.10.1
+go get github.com/joho/godotenv
 ```
