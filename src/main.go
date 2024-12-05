@@ -1,20 +1,18 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
-
-	// "github.com/timoruohomaki/open311togo/storage"
+	"github.com/timoruohomaki/open311togo/storage"
 	"github.com/timoruohomaki/open311togo/telemetry"
-	/* "go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref" */
-	"os"
-
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -41,18 +39,18 @@ func main() {
 
 	// initialize MongoDB
 
-	/* client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
-	storage.MongoGetCollection(client) */
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+	storage.MongoGetCollection(client)
 
 	// start api (http) service
 
 	srv := server.Init(":8080")
 
-	err := (srv.ListenAndServe())
+	err1 := (srv.ListenAndServe())
 
 	// err := (srv.ListenAndServeTLS(os.Getenv("open311TLScertFile"), os.Getenv("open311TLSkeyFile")))
 
-	if err != nil {
+	if err1 != nil {
 		telemetry.Logger.Error("Failed to start open311 API service.")
 	} else {
 		telemetry.Logger.Info("Started open311 API listener on port 8080.")
