@@ -37,6 +37,8 @@ func main() {
 
 	fmt.Println("Session UUID: " + server.GetUUID())
 
+	fmt.Println("Environment: " + os.Getenv("open311env"))
+
 	// initialize MongoDB
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
