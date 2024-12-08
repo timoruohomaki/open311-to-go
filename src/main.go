@@ -19,19 +19,31 @@ func main() {
 
 	// initialize logging and connect Sentry telemetry with or without performance monitoring
 
-	telemetry.InitLog("INFO")
+	telemetry.InitLog("ERROR")
 
 	defer telemetry.Logger.Sync()
 
 	err := godotenv.Load()
 
 	if err != nil {
-	  telemetry.Logger.Fatal("Error loading .env file")
+		telemetry.Logger.Fatal("Error loading .env file")
 	}
 
 	currentTime := time.Now()
 
-	fmt.Println(os.Getenv("CurrentVersion"))
+	fmt.Println(os.Getenv("BuildVersion"))
+
+	// display banner
+	fmt.Println()
+	fmt.Println("=============================================")
+	fmt.Println("=  Starting Open311-To-Go...                      =")
+	fmt.Println("=============================================")
+	fmt.Println("  Build version:    ", strconv.Itoa(os.Getenv("BuildVersion")))
+	fmt.Println("  Build date:       ", currentTime.Format(time.RFC3339)) // TODO overrid this on make script
+	fmt.Println("  Host name:        ", thisHost)
+	fmt.Println("  Environment:      ", os.Getenv("open311env"))
+	fmt.Println("=============================================")
+	fmt.Println()
 
 	fmt.Println("Starting API listener service version " + models.BuildVersion + " at " + currentTime.Format(time.RFC3339))
 
@@ -55,7 +67,7 @@ func main() {
 	if err1 != nil {
 		telemetry.Logger.Error("Failed to start open311 API service.")
 	} else {
-		telemetry.Logger.Info("Started open311 API listener on port 8080.")
+		telemetry.Logger.Info("Started open311 API listener on port ", os.Getenv("open311port"))
 	}
 
 }
