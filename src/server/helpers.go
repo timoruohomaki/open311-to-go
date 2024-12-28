@@ -4,19 +4,20 @@
 package server
 
 import (
-	"github.com/timoruohomaki/open311togo/models"
-	"github.com/timoruohomaki/open311togo/telemetry"
 	"encoding/json"
+	"github.com/google/uuid"
+	"github.com/timoruohomaki/open311togo/models"
+	"log"
 	"net/http"
 	"time"
-	"github.com/google/uuid"
+
 	// "strconv"
 	"github.com/thlib/go-timezone-local/tzlocal"
 )
 
 // generate RFC 4122 compliant UUID
 
-func GetUUID() (string) {
+func GetUUID() string {
 
 	uuid := uuid.New()
 
@@ -34,16 +35,16 @@ func GetServerTime() (result string) {
 	tzinfo, err := tzlocal.RuntimeTZ() //TODO Maybe some error handling
 
 	if err != nil {
-		telemetry.Logger.Error("Failed to get timezone information.")
+		log.Fatalf("Failed to get timezone information: %s", err)
 	}
 
 	t := &models.ServerTime{
-		SqlDateTime: formattedTime,
-		TimeZone:    tzinfo,
-		IsDST:       true,
-		UID:		GetUUID(),
-		BuildVersion:	models.BuildVersion,
-		Message:	"Hosted at api.spatialworks.fi",
+		SqlDateTime:  formattedTime,
+		TimeZone:     tzinfo,
+		IsDST:        true,
+		UID:          GetUUID(),
+		BuildVersion: models.BuildVersion,
+		Message:      "Hosted at api.spatialworks.fi",
 	}
 
 	s, _ := json.Marshal(t)
@@ -89,31 +90,31 @@ func WriteXml(w http.ResponseWriter, status int, v any) {
 
 func StatusCreated(w http.ResponseWriter, data any) {
 	WriteJson(w, http.StatusCreated, Message{
-	 Status: "success",
-	 Data:   data,
+		Status: "success",
+		Data:   data,
 	})
 }
 
 func StatusAcceptedData(w http.ResponseWriter, data any) {
 	WriteJson(w, http.StatusAccepted, Message{
-	 Status: "success",
-	 Data:   data,
+		Status: "success",
+		Data:   data,
 	})
 }
 
 func StatusAcceptedMsg(w http.ResponseWriter, msg string) {
 	WriteJson(w, http.StatusAccepted, Message{
-	 Status:  "success",
-	 Message: msg,
+		Status:  "success",
+		Message: msg,
 	})
 }
 
 func StatusOKAll(w http.ResponseWriter, limit, page int, data any) {
 	WriteJson(w, http.StatusOK, Message{
-	 Status: "success",
-	 Limit:  limit,
-	 Page:   page,
-	 Data:   data,
+		Status: "success",
+		Limit:  limit,
+		Page:   page,
+		Data:   data,
 	})
 }
 
@@ -125,7 +126,7 @@ func StatusOK(w http.ResponseWriter, data any) {
 }
 
 func StatusInternalServerError(w http.ResponseWriter, err string) {
-	telemetry.Logger.Error(err)
+	log.Fatalf("Internal Server Error: %s", err)
 	WriteJson(w, http.StatusInternalServerError, Message{
 		Status: "error",
 		Data:   err,

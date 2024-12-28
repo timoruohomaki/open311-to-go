@@ -13,19 +13,19 @@ import (
 
 // NOTE: Open311 structures follow GeoReport v2 as feasible https://wiki.open311.org/GeoReport_v2/
 
-// helper functions
+// helper constants and functions
 
-const BuildVersion = "110"
+const BuildVersion = "112"
 
 // ServerTime is returned with time -request which is for testing and heartbeat purposes
 
 type ServerTime struct {
-	SqlDateTime 	string `json:"SQLDateTime"`
-	TimeZone    	string `json:"TimeZone"`
-	IsDST       	bool   `json:"DST"`
-	UID				string `json:"UID"`
-	BuildVersion	string	`json:"BuildVersion"`
-	Message			string `json:"Message"`
+	SqlDateTime  string `json:"SQLDateTime"`
+	TimeZone     string `json:"TimeZone"`
+	IsDST        bool   `json:"DST"`
+	UID          string `json:"UID"`
+	BuildVersion string `json:"BuildVersion"`
+	Message      string `json:"Message"`
 }
 
 // Message struct holds the response information when client calls an API
@@ -35,43 +35,40 @@ type Message struct {
 	Message string `json:"message,omitempty"`
 	Limit   int    `json:"limit,omitempty"`
 	Page    int    `json:"page,omitempty"`
-	Data    any    `json:"data,omitempty"`	
+	Data    any    `json:"data,omitempty"`
 }
 
 // open311 data structures
 // resource path: https://api.city.gov/dev/v2/services.xml?jurisdiction_id=city.gov
 
 type Open311ServiceList struct {
-	XMLName		xml.Name			`xml:"serviceList"`
-	ID			primitive.ObjectID	`json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
-	Services 	[]Open311Service	`json:"services" bson:"services" xml:"services>service"`
+	XMLName  xml.Name           `xml:"serviceList"`
+	ID       primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	Services []Open311Service   `json:"services" bson:"services" xml:"services>service"`
 }
 
 type Open311Service struct {
-	ID   			primitive.ObjectID 	`json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
-	ServiceCode 	string				`json:"service_code" bson:"service_code" xml:"service_code"`
-	Name 			string             	`json:"service_name,omitempty" bson:"service_name,omitempty" xml:"service_name"`
-	Description		string				`json:"description" bson:"description" xml:"description"`
-	Metadata		bool				`json:"metadata" bson:"metadata" xml:"metadata"`
-	ServiceType		string				`json:"type" bson:"type" xml:"type"` // accepted values: realtime | batch | blackbox, likely all will be realtime
-	Keywords		string				`json:"keywords" bson:"keywords" xml:"keywords"` // comma-separated
-	Group			string				`json:"group" bson:"group" xml:"group"`
+	ID          primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty" xml:"id,attr"`
+	ServiceCode string             `json:"service_code" bson:"service_code" xml:"service_code"`
+	Name        string             `json:"service_name,omitempty" bson:"service_name,omitempty" xml:"service_name"`
+	Description string             `json:"description" bson:"description" xml:"description"`
+	Metadata    bool               `json:"metadata" bson:"metadata" xml:"metadata"`
+	ServiceType string             `json:"type" bson:"type" xml:"type"`             // accepted values: realtime | batch | blackbox, likely all will be realtime
+	Keywords    string             `json:"keywords" bson:"keywords" xml:"keywords"` // comma-separated
+	Group       string             `json:"group" bson:"group" xml:"group"`
 }
 
 // resource path https://api.city.gov/dev/v2/services/033.xml?jurisdiction_id=city.gov
 
 type Open311CreateUpdateService struct {
-	ServiceCode		string		`json:"service_code"`
+	ServiceCode string `json:"service_code"`
 }
 
 type Open311GetServiceDefinition struct {
-	
 }
 
 type Open311PostServiceDefinition struct {
-
 }
-
 
 // TODO / NOT SURE IF THESE WILL BE NEEDED
 
@@ -80,7 +77,7 @@ type Open311PostServiceDefinition struct {
 	Jurisdiction_id int                `json:"jurisdiction_id"`
 	Service_code    int                `json:"service_code"`
 }
- */
+*/
 // log and telemetry
 
 /* type TeleLog struct {
@@ -92,7 +89,7 @@ type Record struct {
 	Value  []byte `json:"value"`
 	Offset uint64 `json:"offset"`
 }
- */
+*/
 
 /* type CreateUpdateServiceRequest struct {
 }
@@ -115,7 +112,7 @@ type CesSchema struct {
 	Language      string             `json:"language"` // ISO 639
 
 }
- */
+*/
 // geospatial structures
 
 /* type SpatialGeometry struct {
@@ -153,7 +150,7 @@ type KeyName struct {
 	Description          string    `json:"description"`
 	Values               []KeyName `json:"values"`
 }
- */
+*/
 // as in https://docs.ogc.org/is/18-088/18-088.html#featureofinterest
 
 /* type FeatureOfInterest struct {
@@ -170,7 +167,7 @@ type ServiceDefinition struct {
 	PTV_code_URI string                     `json:"ptvCodeURI"`
 	Attribute    ServiceDefinitionAttribute `json:"attributeList"`
 }
- */
+*/
 /*
 type Defaults struct {
 	mongoServiceCollection string

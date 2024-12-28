@@ -1,9 +1,8 @@
 package server
 
 import (
-	// "github.com/timoruohomaki/open311togo/models"
-	"fmt"
 	"github.com/timoruohomaki/open311togo/telemetry"
+	"log"
 	"net/http"
 	"time"
 )
@@ -30,14 +29,12 @@ func Init(address string) *http.Server {
 	//mux.HandleFunc("GET /open311/rest/v1/services/{id}.xml", HandleGetServiceDefinitionXML)
 	//mux.HandleFunc("GET /open311/rest/v1/services/{id}.json", HandleGetServiceDefinitionJSON)
 
-	// example: https://api.city.gov/dev/v2/requests.xml 
+	// example: https://api.city.gov/dev/v2/requests.xml
 
 	// mux.HandleFunc("POST /open311/rest/v1/services/{id}.xml", HandlePostServiceDefinitionXML)
 	// mux.HandleFunc("POST /open311/rest/v1/services/{id}.json", HandlePostServiceDefinitionJSON)
 
-	telemetry.Logger.Info("Starting Open311 Listener, port" + address)
-
-	fmt.Println("Starting Open311 service on port" + address + "...")
+	log.Printf("Starting Open311 Listener, port %s", address)
 
 	return &http.Server{
 		Addr:              address,

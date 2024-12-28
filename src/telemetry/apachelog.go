@@ -6,6 +6,7 @@ package telemetry
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -51,7 +52,7 @@ func WriteAccessLog(apacherow string) {
 	logf, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 
 	if err != nil {
-		Logger.Error("Failed to create access log file: ", err)
+		log.Fatalf("Failed to create access log file: %s", err)
 		fmt.Println(logPath)
 		return
 	}
@@ -59,14 +60,14 @@ func WriteAccessLog(apacherow string) {
 	_, err = fmt.Fprintln(logf, apacherow)
 
 	if err != nil {
-		Logger.Error("Failed to write access log file. ", err)
+		log.Fatalf("Failed to write access log file. %s", err)
 		return
 	}
 
 	err = logf.Close()
 
 	if err != nil {
-		Logger.Error("Failed to close access log file. ", err)
+		log.Fatalf("Failed to close access log file. %s", err)
 		return
 	}
 
