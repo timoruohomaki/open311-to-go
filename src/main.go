@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"os"
@@ -9,18 +8,24 @@ import (
 
 	"github.com/getsentry/sentry-go"
 	"github.com/joho/godotenv"
-	"github.com/timoruohomaki/open311togo/models"
+	// "github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
-	"github.com/timoruohomaki/open311togo/storage"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	// "github.com/timoruohomaki/open311togo/storage"
+	// "go.mongodb.org/mongo-driver/mongo"
+	// "go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func main() {
 
 	var (
-		BuildDate string // This will be overwritten by Makefile
+		BuildDate   string // This will be overwritten by Makefile
+		BuildNumber string // This will be overwritten by Makefile
 	)
+
+	// this is unsafe by the way
+
+	BuildDate = os.Args[1]
+	BuildNumber = os.Args[1]
 
 	err := godotenv.Load()
 
@@ -52,18 +57,14 @@ func main() {
 
 	// display banner
 
-	currentTime := time.Now()
-
-	fmt.Println(os.Getenv("BuildVersion"))
-
 	fmt.Println()
 	fmt.Println("==============================")
-	fmt.Println("=  Starting Open311-To-Go... =")
+	fmt.Println("=  Starting Open311-to-Go... =")
 	fmt.Println("==============================")
 	fmt.Println()
 
 	fmt.Printf("Starting API listener service built at %s\n", BuildDate)
-
+	fmt.Printf("Build number %s\n", BuildNumber)
 	fmt.Println("Session UUID: " + server.GetUUID())
 
 	fmt.Println("Environment: " + os.Getenv("open311env"))
