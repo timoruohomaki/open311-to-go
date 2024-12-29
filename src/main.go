@@ -18,6 +18,10 @@ import (
 
 func main() {
 
+	var (
+		BuildDate string // This will be overwritten by Makefile
+	)
+
 	err := godotenv.Load()
 
 	if err != nil {
@@ -58,7 +62,7 @@ func main() {
 	fmt.Println("==============================")
 	fmt.Println()
 
-	fmt.Println("Starting API listener service version " + models.BuildVersion + " at " + currentTime.Format(time.RFC3339))
+	fmt.Printf("Starting API listener service built at %s\n", BuildDate)
 
 	fmt.Println("Session UUID: " + server.GetUUID())
 
@@ -66,14 +70,14 @@ func main() {
 
 	// initialize MongoDB
 
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+	// client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
 
-	if err != nil {
-		sentry.CaptureException(err)
-		log.Printf("Failed to connect MongoDB: %s", err)
-	}
-
-	storage.MongoGetCollection(client)
+	/* 	if err != nil {
+	   		sentry.CaptureException(err)
+	   		log.Printf("Failed to connect MongoDB: %s", err)
+	   	}
+	*/
+	// storage.MongoGetCollection(client)
 
 	// start api (http) service
 
