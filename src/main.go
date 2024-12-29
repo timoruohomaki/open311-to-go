@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/getsentry/sentry-go"
 	"github.com/joho/godotenv"
+
 	// "github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
 	// "github.com/timoruohomaki/open311togo/storage"
@@ -24,8 +26,13 @@ func main() {
 
 	// this is unsafe by the way
 
-	BuildDate = os.Args[1]
-	BuildNumber = os.Args[1]
+	if len(os.Args) > 2 {
+		BuildDate = os.Args[1]
+		BuildNumber = os.Args[2]
+	} else {
+		log.Fatalf("Incorrect number (%s) of command line arguments.", strconv.Itoa(len(os.Args)))
+	}
+	
 
 	err := godotenv.Load()
 
@@ -47,7 +54,8 @@ func main() {
 
 	defer sentry.Flush(2 * time.Second)
 
-	logFile, err := os.OpenFile("X:/logpath/open311-to-go.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	logFile, err := os.OpenFile("/Users/timo/logpath/open311-to-go.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	// logFile, err := os.OpenFile("X:/logpath/open311-to-go.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 
 	if err != nil {
 		log.Fatalf("Failed to access log file: %s", err)

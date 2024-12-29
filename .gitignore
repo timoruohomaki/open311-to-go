@@ -20,3 +20,5 @@
 # Go workspace file
 go.work
 src/.env
+src/.DS_Store
+.DS_Store
