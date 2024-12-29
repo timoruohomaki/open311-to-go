@@ -1,4 +1,6 @@
-# BUILD_DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
+BUILD_DATE := $(shell date '+%Y-%m-%dT%H:%M:%S')
+
+echo "Hello"
 
 createMongoDBcontainer:
 	docker run -d -p 27017:27017 --name=Open311ToGo -v mongo_data:/data/db mongo_data
