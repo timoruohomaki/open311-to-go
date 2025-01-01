@@ -33,6 +33,7 @@ func main() {
 		log.Fatalf("Incorrect number (%s) of command line arguments.", strconv.Itoa(len(os.Args)))
 	}
 	
+	// loading configuration parameters from .env
 
 	err := godotenv.Load()
 
@@ -94,6 +95,7 @@ func main() {
 
 	err = (srv.ListenAndServe())
 
+	// TODO
 	// err := (srv.ListenAndServeTLS(os.Getenv("open311TLScertFile"), os.Getenv("open311TLSkeyFile")))
 
 	if err != nil {
