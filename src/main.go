@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"time"
 
 	"github.com/getsentry/sentry-go"
@@ -19,20 +18,6 @@ import (
 
 func main() {
 
-	var (
-		BuildDate   string // This will be overwritten by Makefile
-		BuildNumber string // This will be overwritten by Makefile
-	)
-
-	// this is unsafe by the way
-
-	if len(os.Args) > 2 {
-		BuildDate = os.Args[1]
-		BuildNumber = os.Args[2]
-	} else {
-		log.Fatalf("Incorrect number (%s) of command line arguments.", strconv.Itoa(len(os.Args)))
-	}
-	
 	// loading configuration parameters from .env
 
 	err := godotenv.Load()
@@ -40,6 +25,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to load configuration from local .env file.")
 	}
+
+	// the following values are set for .env in Makefile
+
+	buildDate := os.Getenv("BUILD_DATE")
+	buildNumber := os.Getenv("BUILD_NUMBER")
+	buildEnv := os.Getenv("BUILD_ENV")
 
 	// initialize logging and connect Sentry telemetry with or without performance monitoring
 	// note: Sentry DSN is kept in dotenv so unlikely failure to load it will not get tracked
@@ -72,11 +63,11 @@ func main() {
 	fmt.Println("==============================")
 	fmt.Println()
 
-	fmt.Printf("Starting API listener service built at %s\n", BuildDate)
-	fmt.Printf("Build number %s\n", BuildNumber)
+	fmt.Printf("Starting API listener service built at %s\n", buildDate)
+	fmt.Printf("Build number %s\n", buildNumber)
 	fmt.Println("Session UUID: " + server.GetUUID())
 
-	fmt.Println("Environment: " + os.Getenv("open311env"))
+	fmt.Println("Environment: " + buildEnv)
 
 	// initialize MongoDB
 

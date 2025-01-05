@@ -4,6 +4,7 @@ go 1.22
 
 require (
 	github.com/gavv/httpexpect/v2 v2.16.0
+	github.com/getsentry/sentry-go v0.30.0
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/serf v0.10.1
 	github.com/joho/godotenv v1.5.1
@@ -19,7 +20,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
-	github.com/getsentry/sentry-go v0.30.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.1.2 // indirect
