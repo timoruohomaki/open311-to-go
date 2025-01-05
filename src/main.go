@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -8,10 +9,12 @@ import (
 
 	"github.com/getsentry/sentry-go"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	// "github.com/timoruohomaki/open311togo/models"
 	"github.com/timoruohomaki/open311togo/server"
-	// "github.com/timoruohomaki/open311togo/storage"
+	"github.com/timoruohomaki/open311togo/storage"
 	// "go.mongodb.org/mongo-driver/mongo"
 	// "go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -71,14 +74,14 @@ func main() {
 
 	// initialize MongoDB
 
-	// client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
 
-	/* 	if err != nil {
-	   		sentry.CaptureException(err)
-	   		log.Printf("Failed to connect MongoDB: %s", err)
-	   	}
-	*/
-	// storage.MongoGetCollection(client)
+	if err != nil {
+		sentry.CaptureException(err)
+		log.Printf("Failed to connect MongoDB: %s", err)
+	}
+
+	storage.GetServiceCollection(client)
 
 	// start api (http) service
 

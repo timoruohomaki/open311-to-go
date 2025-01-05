@@ -17,7 +17,7 @@ import (
 // database repository
 
 type DbMethod interface {
-	CreateService( s *models.Open311CreateUpdateService) (*models.Open311Service, error)
+	CreateService(s *models.Open311CreateUpdateService) (*models.Open311Service, error)
 	GetServices(limit, page int) ([]*models.Open311Service, error)
 	GetService(id primitive.ObjectID) (*models.Open311Service, error)
 	DeleteService(id primitive.ObjectID) error
@@ -56,7 +56,7 @@ func ConnectToNoSql(dsn string) (DbInterface, error) {
 // get mongodb client
 
 func NewDatabase(dsn string) (*mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
 	// TODO
@@ -75,4 +75,3 @@ func NewDatabase(dsn string) (*mongo.Client, error) {
 	return client, err
 
 }
-
