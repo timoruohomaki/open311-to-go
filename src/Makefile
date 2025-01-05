@@ -19,3 +19,6 @@ build:
 
 run:
 	@BUILD_DATE=$(BUILD_DATE) BUILD_NUMBER="113" BUILD_ENV="DEV" go run main.go
+
+winrun:
+	@go run main.go

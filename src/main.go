@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -72,16 +73,20 @@ func main() {
 
 	fmt.Println("Environment: " + buildEnv)
 
-	// initialize MongoDB
+	// initialize and connect MongoDB
 
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("open311MongoURI")))
+	dsn := flag.String("dsn", os.Getenv("open311MongoURI"), "MongoDB URI")
+
+	client, err := storage.ConnectToNoSql(*dsn)
 
 	if err != nil {
 		sentry.CaptureException(err)
-		log.Printf("Failed to connect MongoDB: %s", err)
+		log.Fatalf("Failed to connect MongoDB service.")
 	}
 
-	storage.GetServiceCollection(client)
+	h := server.NewHandler(client)
+
+	defer h
 
 	// start api (http) service
 
