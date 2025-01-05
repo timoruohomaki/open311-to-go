@@ -5,21 +5,21 @@ Following the conventions on [Semantic Versioning](https://semver.org/).
 
 ## Environmental variables
 
-Configuration parameters are stored as environment variables. In Windows they can be managed with sysdm.cpl.
+Configuration parameters are stored as environment variables (.env).
 
 | Key | Value |
 | --- | --- |
+| BUILD_DATE | Date of build. |
+| BUILD_NUMBER | Sequential number of build. |
+| BUILD_ENV | Target environment: PROD/TEST/DEV |
 | open311MongoURI | MongoDB Atlas connection string in mongodb+srv version |
 | open311SentryDSN | Sentry telemetry connection |
-| open311port | Port of the listener, e.g. 8080 |
+| open311port | Port of the listener as string, e.g. :8080 (note the colon) |
 | open311_SSH_CERT | Path to SSH cert |
 | open311_SSH_KEY | Path to SSH public key |
 | open311_LOGLOCAL | If 1, write local log file on open311_LOGPATH |
 | open311_LOGPATH | Path including filename to local log (e.g. /var/log/open311) |
-
-
->[!TIP]
->While it is year 2024, it still might be required to reboot your Windows 10 after setting environmental variables. 
+| sentryDSN | DSN string for Sentry telemetry |
 
 ## Driver Packages
 
