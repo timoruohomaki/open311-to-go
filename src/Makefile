@@ -1,8 +1,9 @@
 # NOTE: For some reason, BUILD_DATE assignment doesn't work in Windows + VSCode: make extension hangs at this point
 
-BUILD_DATE := $(shell date "+%Y-%m-%dT%H:%M:%S")
-BUILD_NUMBER = 0
-BUILD_ENV = "DEV"
+# BUILD_DATE := $(shell date "+%Y-%m-%dT%H:%M:%S")
+BUILD_DATE := $("1")
+BUILD_NUMBER := $("0")
+BUILD_ENV := $("DEV")
 
 createMongoDBcontainer:
 	docker run -d -p 27017:27017 --name=Open311ToGo -v mongo_data:/data/db mongo_data
